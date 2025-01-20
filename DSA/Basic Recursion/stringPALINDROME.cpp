@@ -14,7 +14,8 @@ int main(){
     
     string s;
     getline(cin,s);
-    cout<<f(0,s)<<endl;
+    if(f(0,s)) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
     return 0;
 
 } 
