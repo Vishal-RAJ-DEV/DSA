@@ -7,9 +7,9 @@ int main(){
     cin>>s;
 
     //precompute
-    int hash[26]={0};
+    int hash[26]={0}; //also use hash[256] for all ascii values another way to store
     for(int i=0;i<s.size();i++){
-        hash[s[i]-'a']++;
+        hash[s[i]-'a']++;   //also use hash[s[i]]++;  another way to store
 
     }
 
@@ -20,7 +20,7 @@ int main(){
         char ch;
         cin>>ch;
         //fetch
-        cout<<hash[ch-'a']<<endl;
+        cout<<hash[ch-'a']<<endl; //also use hash[ch]  another way to fetch
     }
     return 0;
 }

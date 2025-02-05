@@ -1,17 +1,20 @@
 //write function of  nth term number of fibonacci sequence;
 #include <stdio.h>
-int main(){
-    int n,a=0,b=1,c,count=0;
-    printf("enter number of term");
-    scanf("%d",&n);
 
+int main() {
+    int a = 0, b = 1, nextTerm = 0;
     
-    while(count<n){
-    printf("%d\n",a);
-    c=a+b;
-    a=b;
-    b=c;
-    count++;
+    printf("Fibonacci series up to 300:\n");
+    printf("%d, %d", a, b);
+    
+    nextTerm = a + b;
+    while (nextTerm <= 300) { 
+        printf(", %d", nextTerm);
+        a = b;
+        b = nextTerm;
+        nextTerm = a + b;
     }
+    
+    printf("\n");
     return 0;
 }
