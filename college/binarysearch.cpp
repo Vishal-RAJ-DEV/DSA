@@ -7,8 +7,8 @@ int binarysearch(int arr[],int n,int target){
     while(low<=high){
         int mid=low+high/2;
         if(arr[mid]==target) return mid;
-        else if(target>arr[mid])low=mid+1;
-        else high=mid-1;
+        else if(target>arr[mid])low=mid+1; //if target is greater than mid element then we will search in right side of mid element
+        else high=mid-1; //else we will search in left side of mid element
     }
     return -1;
 }
