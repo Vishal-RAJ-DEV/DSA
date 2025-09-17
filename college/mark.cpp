@@ -7,6 +7,5 @@ int main(){
     scanf("%d %d %d %d %d %d ",&physics,&chemistry,&math,&computer,&biology);
     int total =physics+math+chemistry+computer+biology;
     int per=total*100/500;
-    if(per>)
     return 0;
 }

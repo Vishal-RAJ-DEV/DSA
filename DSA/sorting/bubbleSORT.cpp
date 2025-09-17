@@ -10,7 +10,6 @@ void bubbleSORT(int arr [],int n){
                 swap(arr[j],arr[j+1]);
                 didswap=1;  //if there is swap then didswap will be 1
             }
-
         }
         if(didswap==0)   // if no swap happened then the array is already sorted and then we can break the loop so this can take less time complexity 
         break;

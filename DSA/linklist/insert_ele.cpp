@@ -38,7 +38,7 @@ Node * print(Node * head){  //to print the linklist
 }
 
 Node * insertHead(Node * head , int value ){  // insert the head of the linklist
-    return new Node(value , head);
+    return new Node(value , head); //
 }
 Node * insertTail(Node * head , int value){   //insert the  tail of the linklist
     if(head == NULL) return new Node(value);
@@ -70,7 +70,7 @@ Node * insertNodeK(Node * head , int k , int value){  //insert the node at posit
     
 }
 
-Node *insertBeforeVAlue(Node * head , int value , int ele){
+Node *insertBeforeVAlue(Node * head , int value , int ele){ //insert the node before the value
     if(head == NULL) return NULL;
     if (head->data == value){
         return new Node(ele, head);
@@ -87,6 +87,28 @@ Node *insertBeforeVAlue(Node * head , int value , int ele){
     }
     return head;
 }
+
+void deleteNode(Node* node) { //function to delete a node in the linklist when the head is not given (leetcode problem 237)
+    Node* prev = nullptr;
+
+    while (node != nullptr && node->next != nullptr) {
+        node->data = node->next->data;   // Step 1: copy value from next node
+        prev = node;                     // Step 2: update previous pointer
+        node = node->next;               // Step 3: move to next node
+    }
+
+    if (prev != nullptr) {
+        prev->next = nullptr;            // Step 4: remove last copied node
+        delete node;                     // Step 5: delete that last node
+    }
+}
+ void deleteNode1(Node* node) {   //function to delete a node in the linklist when the head is not given (leetcode problem 237) alternative approch 
+       node->data = node->next->data;         // Step 1: copy value from next node
+    Node* temp = node->next;                    // Step 2: store next node
+    node->next = node->next->next;       // Step 3: skip over the next node
+    delete temp; 
+    }
+
 int main(){
     vector<int> arr = {1,2,3,4,5,6};
     Node * head = convertArr2All(arr);
@@ -95,7 +117,7 @@ int main(){
     cout<<"inserting at head"<<endl;
     head = insertHead(head , 0);
     print(head);
-
+    
     cout<<"inerting at tail"<<endl;
 
     head = insertTail(head , 7 );
@@ -109,10 +131,12 @@ int main(){
     cout<<"inserting before the value"<<endl;
     head = insertBeforeVAlue(head , 100 , 50);
     print(head);
-
     
-   
-
-
+    // deleteNode(head->next->next);
+    // print(head);
+    
+    
+    
+    
     return 0;
 }

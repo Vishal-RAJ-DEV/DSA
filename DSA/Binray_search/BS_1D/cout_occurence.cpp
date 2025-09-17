@@ -56,8 +56,8 @@ using namespace std;
         return last - first + 1;
     }
 int main(){
-    vector<int> arr = {1,2,2,3,4,5,6,7,8};
-    int target = 2;
+    vector<int> arr = {1,2,2,3,4,5,6,6,6,7,8};
+    int target = 6;
     int ans = countFreq(arr,target);
     cout<<"the occurence of the target is"<<" "<<ans<<endl;
     return 0;

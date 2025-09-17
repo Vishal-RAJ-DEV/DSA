@@ -63,4 +63,44 @@ int main()
     return 0;
 }
 
+// dry run 
 
+// nums = [1, 0, 3, 0, 5]
+
+// Step 1: Find the first zero
+
+// j = -1 initially
+
+// Loop i = 0 → 4:
+
+// nums[0] = 1 → not zero
+
+// nums[1] = 0 → ✅ found zero → set j = 1, break
+
+// Now: j = 1
+
+
+
+// Step 2: Move non-zero elements after j
+
+// Loop i = j+1 = 2 to 4:
+
+// i = 2: nums[2] = 3 (non-zero)
+
+// swap(nums[2], nums[1]) → [1, 3, 0, 0, 5]
+
+
+// increment j → 2
+
+// i = 3: nums[3] = 0 (zero) → skip
+
+// i = 4: nums[4] = 5 (non-zero)
+
+// swap(nums[4], nums[2]) → [1, 3, 5, 0, 0]
+
+
+// increment j → 3
+
+// Final Output:
+
+// nums = [1, 3, 5, 0, 0]

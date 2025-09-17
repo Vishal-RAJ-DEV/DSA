@@ -1,0 +1,115 @@
+🔑 String Manipulations in C++
+1. String Initialization & Basics
+string s = "hello";
+string s2("world");
+string s3(5, 'a');   // "aaaaa"
+----------------------------------------------------------------------
+2. String Size & Access
+int n = s.size();      // length of string
+char c = s[0];         // access character
+s[n-1];                // last character
+----------------------------------------------------------------------
+
+3. Adding & Removing Characters
+s.push_back('x');      // add at end
+s.pop_back();          // remove last character
+----------------------------------------------------------------------
+
+4. Substring Operations
+string part = s.substr(2);        // from index 2 till end
+string sub = s.substr(1, 3);      // from index 1, length 3
+----------------------------------------------------------------------
+
+5. Concatenation
+string a = "abc", b = "def";
+string c = a + b;     // "abcdef"
+----------------------------------------------------------------------
+
+6. Insert / Erase
+string s = "abcdef";
+s.insert(3, "XYZ");   // "abcXYZdef"
+s.erase(2, 3);        // remove 3 chars from index 2 -> "abdef"
+----------------------------------------------------------------------
+
+7. Replace
+string s = "abcdef";
+s.replace(2, 3, "XYZ");  // replace 3 chars from index 2 -> "abXYZf"
+----------------------------------------------------------------------
+
+8. Find & Search
+string s = "hello world";
+int pos = s.find("world");   // returns 6
+if (s.find("abc") == string::npos) {
+    cout << "not found";
+}
+----------------------------------------------------------------------
+
+9. Comparisons
+string a = "apple", b = "banana";
+if (a == b) { }          // equal
+if (a < b) { }           // lexicographic compare
+----------------------------------------------------------------------
+
+10. Reversing
+reverse(s.begin(), s.end());
+----------------------------------------------------------------------
+
+11. Sorting Characters
+sort(s.begin(), s.end());   // sorts alphabetically
+----------------------------------------------------------------------
+
+12. Character Checks
+char c = 'a';
+isalpha(c);   // true if alphabet
+isdigit(c);   // true if digit
+isalnum(c);   // true if alphanumeric
+tolower(c);   // convert to lowercase
+toupper(c);   // convert to uppercase
+----------------------------------------------------------------------
+
+13. Converting Between String & Numbers
+int x = stoi("123");     // string -> int
+long long y = stoll("99999");
+string s = to_string(456);  // int -> string
+----------------------------------------------------------------------
+
+14. Splitting (using stringstream)
+string str = "apple orange banana";
+stringstream ss(str);
+string word;
+while (ss >> word) {
+    cout << word << endl;   // apple, orange, banana
+}
+----------------------------------------------------------------------
+
+15. Remove Spaces / Specific Chars
+string s = "a b c d";
+s.erase(remove(s.begin(), s.end(), ' '), s.end()); // "abcd"
+----------------------------------------------------------------------
+
+16. Check Palindrome
+string s = "level";
+string t = s;
+reverse(t.begin(), t.end());
+if (s == t) cout << "Palindrome";
+----------------------------------------------------------------------
+
+17. Count Frequency of Characters
+string s = "abac";
+unordered_map<char,int> freq;
+for(char c : s) freq[c]++;
+----------------------------------------------------------------------
+
+🎯 Summary – Most Common in DSA
+
+The must-know operations for solving any DSA string question are:
+
+substr, push_back, pop_back, erase, insert, replace
+
+find, sort, reverse
+
+stoi, to_string
+
+isalpha, isdigit, tolower, toupper
+
+unordered_map or vector<int> for frequency counting

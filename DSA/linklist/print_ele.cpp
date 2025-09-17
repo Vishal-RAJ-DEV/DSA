@@ -32,7 +32,7 @@ Node * convertArr2All (vector<int>&a){
 int checkpresent(Node * head , int value){
     Node * temp = head;
     while(temp){
-        if(temp->data ==value) return 1;
+        if(temp->data ==value) return 1;  //if the value os present in the linklist return 1
         temp = temp->next; //move to the next node
     } 
     return 0;

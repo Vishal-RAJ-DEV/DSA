@@ -8,11 +8,12 @@
 // Space complexity: O(1)   
 using namespace std;
 int missing(vector<int>& arr){
-    int n = arr.size();
+    int n = arr.size() + 1;  //since one number is missing the size of array will be n-1
     int total = n*(n+1)/2;
-    for(int i=0;i<n;i++){
-        total -=arr[i];
+    for(int i=0;i<arr.size();i++){
+        total -= arr[i];
     }
+    return total;
 }
 
 // optimal approach 2: using XOR operator
