@@ -100,6 +100,12 @@ unordered_map<char,int> freq;
 for(char c : s) freq[c]++;
 ----------------------------------------------------------------------
 
+ 18. convert string to int 
+ string s= "23"
+ int x= stoi(s)// 23
+
+ 
+
 🎯 Summary – Most Common in DSA
 
 The must-know operations for solving any DSA string question are:

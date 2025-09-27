@@ -99,7 +99,31 @@ bool detectLoop(Node* head) {
     // without a loop, return false
     return false;
 }
+Node * startingPointOfLoop(Node* head) {
+    if (head == nullptr) {
+        return nullptr;  // No loop in an empty list
+    }
+    Node* slow = head;
+    Node* fast = head;
 
+    // Step 1: Detect if a loop exists using Floyd's Cycle-Finding Algorithm
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast) {
+            // Loop detected, now find the starting point of the loop
+            Node* entry = head;
+            while (entry != slow) {
+                entry = entry->next;
+                slow = slow->next;
+            }
+            return entry;  // Starting point of the loop
+        }
+    }
+
+    return nullptr;  // No loop detected
+}
 
 
 
@@ -123,6 +147,7 @@ int main(){
     }else{
         cout<<"No cycle detected"<<endl;
     }
+    cout<<"starting point of the loop is :"<<startingPointOfLoop(head)->data<<endl;
 
     return 0;
 }

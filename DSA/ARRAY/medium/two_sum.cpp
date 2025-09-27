@@ -4,7 +4,7 @@ using namespace std;
 
 //optimal approach to solve the problem of two sum.
 //time cmplexity of the code is o(n) and space complexity is o(n).
-vector<int> twosum(vector<int>&arr ,int target){
+vector<int> twoSum(vector<int>&arr ,int target){
     unordered_map<int,int>mp;
     int n=arr.size();
     for(int i =0;i<n;i++){
@@ -29,8 +29,8 @@ vector<int> twoSum2(vector<int> &arr, int target) {
         if (sum == target) {
             return {left,right};
         }
-        else if (sum < target) left++;
-        else right--;
+        else if (sum < target) left++;  //if the sum is less than the target then we have increase the value of left++ to increase the sum.
+        else right--;  //if the sum is greater than the target then we have to decrease the value of right-- to decrease the sum.
     }
     return {-1, -1};
 }

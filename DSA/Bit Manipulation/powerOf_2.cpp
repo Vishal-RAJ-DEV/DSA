@@ -18,6 +18,12 @@ bool powerOfTwo1(int n){ //alternative method
     }
     return true; //if we reach here, then n is a power of 2
 }
+int powerofX(int x , int n){
+    if(n == 0) return 1; //base case
+    if(x == 0) return 0; //if x is 0, then x^n is 0
+    
+    return x * powerofX(x, n-1); //recursive case
+}
 int main(){
     int n;
     cout<<"enter your number: "<<endl;
@@ -27,6 +33,10 @@ int main(){
     } else {
         cout<<n<<" is not a power of 2"<<endl;
     }
+    int x, p;
+    cout<<"enter the base and power: "<<endl;
+    cin>>x>>p;
+    cout<<x<<"^"<<p<<" = "<<powerofX(x, p)<<endl;
     
     return 0;
 }

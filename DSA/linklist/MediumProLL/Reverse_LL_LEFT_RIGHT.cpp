@@ -38,30 +38,36 @@ Node * print(Node * head){  //to print the linklist
     cout<<endl;
 }
 
-Node * reverseLinkList(Node * head){  //iterative
-    if(head == nullptr ||  head->next == nullptr) return head;
-    Node * temp = head;
-    Node * prev = nullptr;
-    while(temp!= nullptr){
-        Node * front = temp->next;
-        temp->next = prev;
-        prev = temp;
-        temp = front;
-    }
-
-    Node * newHead = prev;
-    return newHead;
-}
-Node * reverseLinkList1(Node * head){  //recursive
+Node* reverseLinkList(Node* head, int left, int right) {
+    // Handle edge case: empty list or single node
     if(head == nullptr || head->next == nullptr) return head;
 
-    Node * newHead = reverseLinkList1(head->next);
-    Node  * front = head->next;
-    front->next = head;
-    head->next = nullptr;
-    return newHead;
+    // Create a dummy node to handle edge cases (like reversing from first node)
+    Node *dummy = new Node(-1);
+    dummy->next = head;
+    Node *prev = dummy;
 
+    // Move prev to the node just before the reversal starts
+    for(int i = 1; i < left; i++) {
+        prev = prev->next;
+    }
+
+    // curr points to the first node that will be reversed (at position 'left')
+    Node *curr = prev->next;
+    Node *nextnode = nullptr;
+
+    // The actual reversal process
+    for(int i = 0; i < right - left; i++) {
+        nextnode = curr->next;       // Store the next node
+        curr->next = nextnode->next; // Point current to nextnode's next (skip nextnode)
+        nextnode->next = prev->next; // Point nextnode to prev's next
+        prev->next = nextnode;       // Point prev to nextnode
+    }
+
+    // Return the head of the modified list
+    return dummy->next;
 }
+
 
 
 
@@ -72,7 +78,7 @@ int main(){
     print(head);
 
     cout<<"After reversing the linklist :  "<<endl;
-    head = reverseLinkList1(head);
+    head = reverseLinkList(head,2,4);
     print(head);
     return 0;
 }
