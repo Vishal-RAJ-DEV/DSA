@@ -12,8 +12,9 @@ int minSubArrayLen(int target, vector<int>& nums) {
             sum+=nums[i];
 
             while(sum>=target){
-                minn = min(minn , i - left + 1);
-                sum -=nums[left];
+                minn = min(minn , i - left + 1);  //here i - left + 1 is the size of the current subarray whose sum is greater than or equal to the target value. 
+                //we update the minimum size of the subarray if the current size is less than the previous minimum size.
+                sum -=nums[left]; // reduce the window size by removing the leftmost element from the sum
                 left++;
             }
         }
