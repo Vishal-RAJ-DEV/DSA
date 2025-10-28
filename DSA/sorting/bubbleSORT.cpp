@@ -1,7 +1,13 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
+//algorithm of bubble sort
+/*
+here what is happening
+-> we are looping end to start so we can make sure that the largest number is at the end of the array
+-> in every iteration we are comparing each element with the next one and swapping them if they are in wrong order
+-> if in one complete iteration no swap happened then we can say that the array is already sorted
+*/
 void bubbleSORT(int arr [],int n){
     for(int i=n-1;i>=0;i--){  //we loop through the array from the end to the start to make sure that the largest number is at the end of the array
         int didswap =0; //declare it  zero to check if any swap happened the loop will run

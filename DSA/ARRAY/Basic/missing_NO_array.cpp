@@ -8,8 +8,10 @@
 // Space complexity: O(1)   
 using namespace std;
 int missing(vector<int>& arr){
-    int n = arr.size() + 1;  //since one number is missing the size of array will be n-1
+    int n = arr.size(); 
+    cout<<"n is"<<n<<endl;
     int total = n*(n+1)/2;
+    cout<<"total is"<<total<<endl;
     for(int i=0;i<arr.size();i++){
         total -= arr[i];
     }

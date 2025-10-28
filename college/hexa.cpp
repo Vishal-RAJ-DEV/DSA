@@ -16,7 +16,7 @@ int converthexatodecimal(string s)
         if (ch >= '0' && ch <= '9') {
             digit = ch - '0';
         } else if (ch >= 'A' && ch <= 'F') {
-            digit = ch - 'A' + 10;
+            digit = ch - 'A' + 10; //here the value of A is 10 in decimal , B is 11 , C is 12 , D is 13 , E is 14 , F is 15 thats why we add 10 to it.
         } else {
             cerr << "Invalid hexadecimal character: " << ch << endl;
             return -1;  // Error case

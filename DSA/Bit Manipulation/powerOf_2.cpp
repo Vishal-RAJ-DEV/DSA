@@ -24,6 +24,25 @@ int powerofX(int x , int n){
     
     return x * powerofX(x, n-1); //recursive case
 }
+
+ double myPow(double x, int n) {
+        double ans = 1.0;
+        long long nn = n;
+        if(nn < 0) nn = -1 * nn;//convert the power into the positve 
+        while(nn){
+            if(nn%2){//means nn % 2  = 1 (true) 
+                ans = ans * x;
+                nn = nn - 1;
+            }
+            else{
+                x = x* x;
+                nn = nn /2;
+            }
+        }
+        if(n< 0) ans = double( 1.0) / double(ans); //for negtive exponent x*-1 = 1/x
+        return ans;
+    }
+
 int main(){
     int n;
     cout<<"enter your number: "<<endl;
@@ -37,6 +56,13 @@ int main(){
     cout<<"enter the base and power: "<<endl;
     cin>>x>>p;
     cout<<x<<"^"<<p<<" = "<<powerofX(x, p)<<endl;
+
+    double base;
+    int exponent;
+    cout << "Enter base and exponent: ";
+    cin >> base >> exponent;
+    cout << base << "^" << exponent << " = " << myPow(base, exponent) << endl;
+    
     
     return 0;
 }

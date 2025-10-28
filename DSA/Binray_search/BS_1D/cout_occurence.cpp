@@ -4,7 +4,13 @@ using namespace std;
 
 // Problem Statement: You are given a sorted array containing N integers and a number X, you have to find the occurrences of X in the given array.
 
+//algorithm:
 
+//1. first find the target in the array using the arr[mid] and store it 
+//-> also if the target is found then move the high to mid -1 to find the is the target alreay exist in the left side of the array
+//2. if the target is not found in the left side then move and the arr[mid] < target then move the low to mid + 1
+//3. if the target is not found in the right side then move and the arr[mid] > target then move the high to mid - 1
+//4. repeat the same process for the last occurence of the target in the array 
 
  int firstOccurence(vector<int>&arr ,int n, int target){
         int low = 0;

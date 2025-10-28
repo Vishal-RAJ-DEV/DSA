@@ -22,31 +22,65 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 */
+// optimal approach: Sliding Window with HashSet
+// Time Complexity: O(n)
+//here the basic idea is the traverse the string with two pointers left and right and keep track of the characters in the current window using a hashset
+//if the character is already present in the hashset then we will move the left pointer to the right until the character is not present in the hashset
+//if the character is not present in the hashset then we will add the character to the hashset and update the maximum length of the substring
 
-int lengthOfLongestSubstring(string s) {
-    unordered_set<char> charset;    // Set to track characters in current window
-    int left = 0;                   // Left pointer of sliding window
-    int maxlen = 0;                 // Track maximum length found so far
 
-    for (int right = 0; right < s.size(); right++) {
+int lengthOfLongestSubstring(string s)
+{
+    vector<int> map(256, -1);    // Array to store last seen index of each character (ASCII)
+    int left = 0;                // Left boundary of current window
+    int right = 0;               // Right boundary of current window  
+    int n = s.size();            // Length of input string
+    int len = 0;                 // Maximum length found so far
+    
+    while (right < n)            // Iterate through string with right pointer
+    {
+        // Check if current character was seen before in current window
+        if (map[s[right]] != -1)
+        {
+            // Move left pointer to position after last occurrence of current character
+            // Use max to ensure left never moves backward
+            left = max((map[s[right]] + 1), left);
+        }
+        
+        map[s[right]] = right;              // Update last seen index of current character
+        len = max(right - left + 1, len);   // Update maximum length if current window is larger
+        right++;                            // Move right pointer forward
+    }
+    return len;                             // Return maximum length found
+}
+
+
+int lengthOfLongestSubstring1(string s)
+{
+    unordered_set<char> charset; // Set to track characters in current window
+    int left = 0;                // Left pointer of sliding window
+    int maxlen = 0;              // Track maximum length found so far
+
+    for (int right = 0; right < s.size(); right++)
+    {
         // If character already exists in current window, shrink window from left
-        while (charset.find(s[right]) != charset.end()) {
+        while (charset.find(s[right]) != charset.end())
+        {
             charset.erase(s[left]); // Remove leftmost character from set
             left++;                 // Move left pointer forward
         }
 
-        charset.insert(s[right]);   // Add current character to the set
+        charset.insert(s[right]);                 // Add current character to the set
         maxlen = max(maxlen, (right - left + 1)); // Update maximum length
     }
-    return maxlen;                  // Return the final maximum length
+    return maxlen; // Return the final maximum length
 }
 int main()
 {
     string s = "abcabcbb";
-    cout << lengthOfLongestSubstring(s) << endl;  // Output: 3
+    cout << lengthOfLongestSubstring(s) << endl; // Output: 3
     return 0;
 }
-
 
 /*
 Start: left=0, right=0, charset={}, maxlen=0

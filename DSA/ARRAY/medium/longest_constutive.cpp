@@ -3,6 +3,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//Brute force approach (O(N log N) time complexity due to sorting)
+int longestConsecutive1(vector<int>& nums) {
+        if(nums.size() == 0) return 0;
+        sort(nums.begin() , nums.end());
+        int n = nums.size();
+        int lastSmaller = INT_MAX;
+        int cnt = 0;
+        int longest = 1;
+        for(int i = 0 ;i<n;i++){
+            if(nums[i] - 1 == lastSmaller){//if the last number is lesser then current number then its a series number so increse the count 
+                cnt+=1;
+                lastSmaller = nums[i];
+            }
+            else if(lastSmaller != nums[i]){
+                cnt = 1; //new series comes reset the cnt 
+                lastSmaller = nums[i]; //and set the new start of the series 
+            }
+            longest = max(longest , cnt);
+        }
+        return longest;
+    }
+
+//Optimal approach (O(N) time complexity and O(N) space complexity)
 int longestSuccessiveElements(vector<int>&a) {
     int n = a.size();
     if (n == 0) return 0;

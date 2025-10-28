@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//the time complexity is O(n^2) and space complexity is O(1) if we don't consider the output space
+//Approach: sort the array and then fix one element and use two pointer approach to find
 vector<vector<int>> threeSum(vector<int> &nums)
 {
     vector<vector<int>> result;

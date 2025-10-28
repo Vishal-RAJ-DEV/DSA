@@ -1,7 +1,8 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
+//here we are using the dutch national flag algorithm
+//to sort the array of 0s , 1s and 2s
 //sort colors question or sort 0s , 1s and 2s in an array
 // time complexity O(n)
 void sort(vector<int>& arr){
