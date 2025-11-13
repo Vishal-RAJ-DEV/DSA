@@ -38,7 +38,7 @@ Node * print(Node * head){  //to print the linklist
 }
 
 Node * insertHead(Node * head , int value ){  // insert the head of the linklist
-    return new Node(value , head); //
+    return new Node(value , head); //here value is data and head is next pointer of the new node which form the new head of the linklist
 }
 Node * insertTail(Node * head , int value){   //insert the  tail of the linklist
     if(head == NULL) return new Node(value);

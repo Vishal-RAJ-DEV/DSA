@@ -82,24 +82,28 @@ Node * deleteNodeK(Node * head , int k){
         if(cnt== k) break;
         KNode = KNode->next;
     }
-
+    //preserve the previous and front nodes of KNode
     Node * prev = KNode->back;
     Node * front = KNode->next;
 
-    if(prev == nullptr || front == nullptr){
+    if(prev == nullptr || front == nullptr){ //in this both prev and front are null means there is only one node in the DLL so there will be the null if we delete that node
         return nullptr;
     }
-    else if(prev == nullptr){
+    else if(prev == nullptr){ //if the prev is null then knode is head and we need to delete the head
         return deleteHead(head);
     }
-    else if(front == nullptr){
+    else if(front == nullptr){ //if the front is null then knode is tail and we need to delete the tail
         return deleteTail(head);
     }
+        //connect the previous and front nodes by this kNode will unliked form the prev and front nodes
         prev->next = front;
         front->back = prev;
 
+        // now point the next and back of KNode to null which makes it isolated
         KNode->next = nullptr;
         KNode->back = nullptr;
+
+        //free the memory
         delete KNode;
         return head;
 

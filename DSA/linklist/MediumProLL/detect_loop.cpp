@@ -99,6 +99,8 @@ bool detectLoop(Node* head) {
     // without a loop, return false
     return false;
 }
+
+
 Node * startingPointOfLoop(Node* head) {
     if (head == nullptr) {
         return nullptr;  // No loop in an empty list
