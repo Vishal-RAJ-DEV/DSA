@@ -40,7 +40,7 @@ int lengthOfLongestSubstring(string s)
     while (right < n)            // Iterate through string with right pointer
     {
         // Check if current character was seen before in current window
-        if (map[s[right]] != -1)
+        if (map[s[right]] != -1)//here not -1 means the character has been seen before
         {
             // Move left pointer to position after last occurrence of current character
             // Use max to ensure left never moves backward

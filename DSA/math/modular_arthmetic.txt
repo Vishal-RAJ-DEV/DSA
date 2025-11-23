@@ -1,0 +1,78 @@
+MODULAR ARITHMETIC - Complete Reference
+
+1. BASIC DEFINITIONS
+    - a ≡ b (mod m) means m divides (a - b)
+    - a mod m = remainder when a is divided by m
+    - Result always in range [0, m-1]
+
+2. BASIC OPERATIONS
+    
+    Addition:
+    (a + b) mod m = ((a mod m) + (b mod m)) mod m
+    
+    Subtraction:
+    (a - b) mod m = ((a mod m) - (b mod m) + m) mod m
+    
+    Multiplication:
+    (a * b) mod m = ((a mod m) * (b mod m)) mod m
+    
+    Division:
+    (a / b) mod m = (a * b^(-1)) mod m  [where b^(-1) is modular inverse]
+
+3. MODULAR EXPONENTIATION
+    (a^b) mod m - computed using binary exponentiation
+    Time Complexity: O(log b)
+
+4. MODULAR INVERSE
+    - a^(-1) mod m exists only if gcd(a, m) = 1
+    
+    Methods:
+    a) Extended Euclidean Algorithm
+    b) Fermat's Little Theorem: a^(-1) ≡ a^(m-2) (mod m) [when m is prime]
+    c) Euler's Theorem: a^(-1) ≡ a^(φ(m)-1) (mod m)
+
+5. PROPERTIES
+    - Associative: (a + b) + c ≡ a + (b + c) (mod m)
+    - Commutative: a + b ≡ b + a (mod m)
+    - Distributive: a * (b + c) ≡ (a * b) + (a * c) (mod m)
+    - If a ≡ b (mod m), then a^n ≡ b^n (mod m)
+
+6. IMPORTANT THEOREMS
+    
+    Fermat's Little Theorem:
+    If p is prime and gcd(a, p) = 1, then a^(p-1) ≡ 1 (mod p)
+    
+    Euler's Theorem:
+    If gcd(a, m) = 1, then a^φ(m) ≡ 1 (mod m)
+    [φ(m) is Euler's totient function]
+    
+    Chinese Remainder Theorem (CRT):
+    System of congruences with coprime moduli has unique solution
+
+7. COMMON APPLICATIONS
+    - Large number arithmetic
+    - Cryptography (RSA)
+    - Hash functions
+    - Cycle detection
+    - Combinatorics (nCr mod m)
+    - Fast exponentiation
+
+8. USEFUL FORMULAS
+    - (a^b) mod m = ((a mod m)^b) mod m
+    - (a * b) mod m = ((a mod m) * (b mod m)) mod m
+    - (a + b) mod m = ((a mod m) + (b mod m)) mod m
+    - Negative: (a mod m + m) mod m ensures positive result
+    - For prime p: a^p ≡ a (mod p)
+    - (a/b) mod m = (a * modInverse(b, m)) mod m
+
+9. EDGE CASES
+    - Division by zero is undefined
+    - Modular inverse doesn't exist if gcd(a, m) ≠ 1
+    - Handle negative numbers: ((a % m) + m) % m
+    - For subtraction, add m before taking mod to avoid negative
+
+10. TIME COMPLEXITIES
+     - Addition/Subtraction/Multiplication: O(1)
+     - Modular Exponentiation: O(log n)
+     - Modular Inverse (Extended GCD): O(log m)
+     - Modular Inverse (Fermat): O(log m)

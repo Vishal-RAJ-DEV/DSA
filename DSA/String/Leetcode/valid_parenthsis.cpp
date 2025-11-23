@@ -19,53 +19,62 @@ It can be written as (A), where A is a valid string.
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
- string minRemoveToMakeValid(string s) {
-    int n = s.size();                // Store the length of input string
-    string result;                   // Create first result string
-    int bal = 0;                     // Balance counter for parentheses
-    
+string minRemoveToMakeValid(string s)
+{
+    int n = s.size(); // Store the length of input string
+    string result;    // Create first result string
+    int bal = 0;      // Balance counter for parentheses
+
     // First pass: Process the string from left to right
-    for(int i = 0; i < n; i++) {
-        if(s[i] == '(') {            // If character is opening parenthesis
-            bal++;                   // Increment balance counter
-            result.push_back(s[i]);  // Add '(' to result
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '(')
+        {                           // If character is opening parenthesis
+            bal++;                  // Increment balance counter
+            result.push_back(s[i]); // Add '(' to result
         }
-        else if(s[i] == ')') {       // If character is closing parenthesis
-            if(bal > 0) {            // If we have at least one unmatched '('
-                bal--;               // Decrement balance counter
+        else if (s[i] == ')')
+        { // If character is closing parenthesis
+            if (bal > 0)
+            {                           // If we have at least one unmatched '('
+                bal--;                  // Decrement balance counter
                 result.push_back(s[i]); // Add ')' to result
             }
             // Skip adding ')' if no matching '(' is available
         }
-        else {                       // If character is not a parenthesis
-            result.push_back(s[i]);  // Add it to result
+        else
+        {                           // If character is not a parenthesis
+            result.push_back(s[i]); // Add it to result
         }
     }
-    
+
     // At this point, 'result' has no extra closing parentheses
     // But it may have extra opening parentheses
-    
-    string finalRes = "";            // Create final result string
-    int openpar = bal;               // Count of extra opening parentheses
-    
+
+    string finalRes = ""; // Create final result string
+    int openpar = bal;    // Count of extra opening parentheses
+
     // Second pass: Process the first result from right to left
-    for(int i = result.size()-1; i >= 0; i--) {
-        if(result[i] == '(' && openpar > 0) {  // If character is '(' and we have extra ones
-            openpar--;               // Skip this '(' by not adding to finalRes
+    for (int i = result.size() - 1; i >= 0; i--)
+    {
+        if (result[i] == '(' && openpar > 0)
+        {              // If character is '(' and we have extra ones
+            openpar--; // Skip this '(' by not adding to finalRes
         }
-        else {                       // Otherwise
+        else
+        {                                  // Otherwise
             finalRes.push_back(result[i]); // Add character to finalRes
         }
     }
-    
+
     // finalRes is built in reverse order, so we need to reverse it
     reverse(finalRes.begin(), finalRes.end());
-    
-    return finalRes;                 // Return the valid string
+
+    return finalRes; // Return the valid string
 }
-int main(){
+int main()
+{
     string s = "lee(t(c)o)de)";
-    cout << minRemoveToMakeValid(s) << endl;  // Output: lee(t(c)o)de
+    cout << minRemoveToMakeValid(s) << endl; // Output: lee(t(c)o)de
     return 0;
 }
-
