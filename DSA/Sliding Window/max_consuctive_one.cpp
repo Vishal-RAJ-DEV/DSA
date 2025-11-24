@@ -34,10 +34,30 @@ int maxConsuctiveOne1(vector<int>& nums, int k ){
     }
     return maxlen;
 }
+//here we can use if condition instead of while condition because in while condition we are checking the condition multiple times where as in if condition we are checking only once
+//so it will be more optimized
+int maxConsuctiveOne2(vector<int>& nums, int k ){
+    int n = nums.size();
+    int left = 0 ;
+    int right = 0 ;
+    int zeros = 0 ;
+    int maxlen = 0 ;
+    while(right < n ){
+        if(nums[right] == 0 ) zeros++; //only increase the zero count when we encounter a zero 
+        if(zeros > k){  //shrink the window from left until the zeros are less than or equal to k
+            if(nums[left] == 0) zeros--; //if the zero is at the left pointer decrease the zero count
+            left ++; // and increase the left pointer to shrink the window
+        }
+        maxlen = max(maxlen , right-left+1);  //calculate the max length of the window `
+        right++;  //increse the right pointer to expand the window
+    }
+    return maxlen;
+}
 int main(){
     vector<int> nums = {1,1,1,0,0,0,1,1,1,1,0};
     int k = 2;
     cout<<maxConsuctiveOnes(nums, k)<<endl;
     cout<<maxConsuctiveOne1(nums, k)<<endl;
+    cout<<maxConsuctiveOne2(nums, k)<<endl;
     return 0;
 }

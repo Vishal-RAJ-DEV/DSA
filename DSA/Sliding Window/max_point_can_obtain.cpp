@@ -99,10 +99,10 @@ int maxScore(vector<int> &cardPoints, int k)
     for (int i = 0; i < k; ++i)
     {
         // Subtract card from front
-        total -= cardPoints[k - 1 - i];
+        total -= cardPoints[k - 1 - i]; // here k-1 is same as left pointer and i used to move the left pointer to left side like left -- decresing 
 
         // Add card from back
-        total += cardPoints[n - 1 - i];
+        total += cardPoints[n - 1 - i]; //same as here n-1 points to last element and i used move the left side like right -- decreasing in left side 
 
         // Update max score if needed
         maxPoints = max(maxPoints, total);
