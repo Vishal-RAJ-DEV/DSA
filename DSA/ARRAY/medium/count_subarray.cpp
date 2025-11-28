@@ -7,7 +7,7 @@ int findAllSubarraysWithGivenSum(vector < int > & arr, int k) {
     unordered_map<int,int> mpp;
     int preSum = 0, cnt = 0;
 
-    mpp[0] = 1; // Setting 0 in the map.
+    mpp[0] = 1; // Setting 0 in the map this is because if the prefix sum itself is equal to k then we need to count that subarray as well
     for (int i = 0; i < n; i++) {
         // add current element to prefix Sum:
         preSum += arr[i];
