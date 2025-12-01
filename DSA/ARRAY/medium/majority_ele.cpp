@@ -45,7 +45,8 @@ int majorityElement1(vector<int> v) {
         else if (el == v[i]) cnt++;
         else cnt--;
     }
-
+    //  cout<<el<<endl;
+    //  cout<<cnt<<endl;
     //checking if the stored element
     // is the majority element:
     int cnt1 = 0;
@@ -60,7 +61,7 @@ int majorityElement1(vector<int> v) {
 int main()
 {
     vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
-    int ans = majorityElement(arr);
+    int ans = majorityElement1(arr);
     cout << "The majority element is: " << ans << endl;
     return 0;
 }
