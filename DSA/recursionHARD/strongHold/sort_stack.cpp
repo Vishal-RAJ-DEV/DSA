@@ -43,3 +43,20 @@ int main(){
     }
     return 0;
 }
+
+/*
+sortStack() calls:
+├─ sortStack-1: top=23, remaining=[34,3,31,98,92]
+│  ├─ sortStack-2: top=92, remaining=[34,3,31,98]
+│  │  ├─ sortStack-3: top=98, remaining=[34,3,31]
+│  │  │  ├─ sortStack-4: top=31, remaining=[34,3]
+│  │  │  │  ├─ sortStack-5: top=3, remaining=[34]
+│  │  │  │  │  ├─ sortStack-6: top=34, remaining=[]
+│  │  │  │  │  │  └─ BASE CASE: empty stack, RETURN
+│  │  │  │  │  └─ insertInSortedStack([], 34)
+│  │  │  │  └─ insertInSortedStack([34], 3)
+│  │  │  └─ insertInSortedStack([3,34], 31)
+│  │  └─ insertInSortedStack([3,31,34], 98)
+│  └─ insertInSortedStack([3,31,34,98], 92)
+└─ insertInSortedStack([3,31,34,92,98], 23)
+*/
