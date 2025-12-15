@@ -5,6 +5,11 @@ using namespace std;
 // Helper recursive function to generate subsequences
 void helper(string &s, int index, string &current, vector<string> &result)
 {
+    // Original string length = n
+    // Valid indices = 0, 1, 2, ..., n-1
+    // When index = n → We've gone beyond all valid indices
+    //                 → All decisions made
+    //                 → Base case reached
     // Base case: If index reaches string length, add current subsequence to result
     if (index == s.size())
     {
@@ -81,7 +86,7 @@ Call Stack: [helper("AB", 0, "", result)]
 Call Stack: [helper("AB", 0, "", result)]
             [helper("AB", 1, "", result)]
 - index = 1, current = "", s[1] = 'B'
-- index < s.size() → Continue  
+- index < s.size() → Continue
 - First: Exclude 'B' → Call helper("AB", 2, "", result)
 
 🎯 Call 3: helper("AB", 2, "", result) ✅ BASE CASECall Stack: [helper("AB", 0, "", result)]
