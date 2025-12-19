@@ -39,6 +39,43 @@ vector<string> getSubsequences(string s)
     return result;
 }
 
+// using bitmaskiing to generate subsequences
+//  Function to return all subsequences of string s
+vector<string> getSubsequences1(string s)
+{
+    // Length of input string
+    int n = s.size();
+
+    // Total subsequences = 2^n
+    int total = 1 << n;
+
+    // Vector to store all subsequences
+    vector<string> subsequences;
+
+    // Iterate over all bit masks from 0 to 2^n - 1
+    for (int mask = 0; mask < total; mask++)
+    {
+        // Temporary subsequence string
+        string subseq = "";
+
+        // Check each bit position in mask
+        for (int i = 0; i < n; i++)
+        {
+            // If i-th bit of mask is set, include s[i]
+            if (mask & (1 << i))
+            {
+                subseq += s[i];
+            }
+        }
+
+        // Store the formed subsequence
+        subsequences.push_back(subseq);
+    }
+
+    // Return all generated subsequences
+    return subsequences;
+}
+
 int main()
 {
 
@@ -46,6 +83,13 @@ int main()
     cin >> s;
     vector<string> subsequences = getSubsequences(s);
     for (auto &it : subsequences)
+    {
+        cout << it << endl;
+    }
+
+    cout << "Now using bitmasking to generate subsequences" << endl;
+    vector<string> subsequences1 = getSubsequences1(s);
+    for (auto &it : subsequences1)
     {
         cout << it << endl;
     }
