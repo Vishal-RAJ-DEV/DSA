@@ -65,6 +65,8 @@ public:
             // nodes at the current level
             vector<int> level; 
 
+
+            //so here clearing te confusion beacuse we have to store the all the current ele in the queue in a level vector so use the loop for store one level and then push that level vector into the ans vector and for further levels store the childern ele in the queue and repeat the same process
             for (int i = 0; i < size; i++) {
                 // Get the front node in the queue
                 TreeNode* node = q.front(); 

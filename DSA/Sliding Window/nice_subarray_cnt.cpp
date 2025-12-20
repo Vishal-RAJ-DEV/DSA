@@ -99,6 +99,7 @@ int atmost(vector<int> &nums, int k)
 }
 int numberOfSubarrays(vector<int> &nums, int k)
 {
+    cout<<atmost(nums, k)<<" "<<atmost(nums, k - 1)<<endl;
     return atmost(nums, k) - atmost(nums, k - 1);
 }
 int main()

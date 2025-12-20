@@ -42,7 +42,7 @@ public:
     // Function to calculate number of subarrays with sum exactly equal to goal
     int numSubarraysWithSum(vector<int>& nums, int goal) {
         // Return difference between subarrays with sum at most goal and at most (goal - 1)
-        // cout<<atMost(nums, goal)<<" "<<atMost(nums, goal - 1)<<endl;
+        cout<<atMost(nums, goal)<<" "<<atMost(nums, goal - 1)<<endl;
         return atMost(nums, goal) - atMost(nums, goal - 1);
     }
 

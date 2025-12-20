@@ -59,6 +59,9 @@ void generate(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &su
 
 // now if i want to generate only one of the subset which matches the sum then i can use a boolean function here
 
+//here we will return true as soon as we find one subset which matches the sum so that we can stop further recursion
+// and if both the include and exclude calls return false then only we will return false
+//and all the return value will comes back to the main function genrate1 throught the recursion stack of every call 
 bool generate1(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &subset)
 {
     // base case
