@@ -32,7 +32,7 @@ bool helper(vector<vector<char>>& board, int row, int col) {
     if (row == 9) {
         return true;
     }
-    int nextRow = row, nextCol = col + 1;
+    int nextRow = row, nextCol = col + 1; //next is used to for the next recursive call of helper function
     if (nextCol == 9) {
         nextRow = row + 1;
         nextCol = 0;
