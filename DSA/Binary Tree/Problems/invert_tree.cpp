@@ -79,3 +79,49 @@ int main()
 
     return 0;
 }
+
+/*
+invertTree(1)
+├── left = invertTree(2) ────────────────────┐
+│   ├── left = invertTree(4) ─────────────┐   │
+│   │   ├── left = invertTree(null) ──┐   │   │
+│   │   │   └── return null           │   │   │
+│   │   ├── right = invertTree(null) ─┼───┘   │
+│   │   │    └── return null          │       │
+│   │   ├── root->right = null ───────┘       │
+│   │   ├── root->left = null                 │
+│   │   └── return Node(4) ───────────────────┘
+│   │                                         │
+│   ├── right = invertTree(5) ────────────┐   │
+│   │   ├── left = invertTree(null) ──┐   │   │
+│   │   │   └── return null           │   │   │
+│   │   ├── right = invertTree(null) ─┼───┘   │
+│   │   │    └── return null          │       │
+│   │   ├── root->right = null ───────┘       │
+│   │   ├── root->left = null                 │
+│   │   └── return Node(5) ───────────────────┘
+│   │                                         │
+│   ├── root->right = Node(4) [swap] ─────────┘
+│   ├── root->left = Node(5) [swap]
+│   └── return Node(2) with swapped children
+│
+├── right = invertTree(3) ───────────────────┐
+│   ├── left = invertTree(null) ──┐          │
+│   │   └── return null           │          │
+│   ├── right = invertTree(null) ─┼──────────┘
+│   │    └── return null          │
+│   ├── root->right = null ───────┘
+│   ├── root->left = null
+│   └── return Node(3)
+│
+├── root->right = Node(2) [swap] ────────────┘
+├── root->left = Node(3) [swap]
+└── return Node(1) with swapped children
+
+Original:       After Step 6:      Final Result:
+    1               1                   1
+   / \             / \                 / \
+  2   3           2   3               3   2
+ / \      →      / \          →          / \
+4   5           5   4                   5   4
+*/
