@@ -30,16 +30,16 @@ public:
                 return ceilNode;
             }
             // If target is less than current node, go left
-            if (target < root->val)
+            if (target > root->val)
             {
                 ceilNode = root; // potential ceil
-                root = root->left; // go left to find smaller value which is also >=target
+                root = root->right; // go right to find smaller value which is also >=target
             }
 
-            // If target is greater than current node, go right
+            // If value is greater than current node, go left to find smaller value
             else
             {
-                root = root->right;
+                root = root->left;
             }
         }
 
@@ -55,19 +55,19 @@ public:
         if (root->val == val)
             return root;
 
-        if (root->val >= val)
+        if (root->val <= val)
         {
-            //call goes to left sub tree till there is node in the left sub tree otherewise
-            //it will either return null or the ceil node 
-            // if we get the node value greater than or equal to val we go to left sub tree to find smaller value which is also >=val
-            TreeNode *leftCeil = searchBST1(root->left, val);
-            // so here if leftCeil is null it means there is no ceil in left sub tree so root is the ceil or else leftCeil is the ceil value exactly
-            return (leftCeil != nullptr) ? leftCeil : root;
+            //call goes to right sub tree till there is node in the right sub tree otherewise
+            //it will either return null or the floor node 
+            // if we get the node value less than or equal to val we go to right sub tree to find greater value which is also <=val
+            TreeNode *rightFloor = searchBST1(root->right, val);
+            // so here if rightFloor is null it means there is no floor in right sub tree so root is the floor or else rightFloor is the floor value exactly
+            return (rightFloor != nullptr) ? rightFloor : root;
         }
         else
         {
-            //so here we don't have greater value on left sub tree so we go to right sub tree to find ceil
-            return searchBST1(root->right, val); // ✅ return
+            //so here we don't have greater value on left sub tree so we go to left sub tree to find floor
+            return searchBST1(root->left, val); // ✅ return
         }
     }
 };
@@ -83,12 +83,11 @@ int main()
 
     Solution obj;
     TreeNode *result = obj.searchBST(root, 6);
-    cout << "Ceil value is: ";
+    cout << "Floor value is: ";
     if (result)
         cout << result->val << endl;
     else
-        cout << "No ceil value found" << endl;
-
+        cout << "No floor value found" << endl;
 
     return 0;
 }

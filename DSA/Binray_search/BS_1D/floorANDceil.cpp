@@ -15,11 +15,11 @@ int findFloor(int arr[], int n, int x) {
 		// maybe an answer
 		if (arr[mid] <= x) {
 			ans = arr[mid];
-			//look for smaller index on the left
+			///there could be a larger value on the right which is also <=x so search on right
 			low = mid + 1;
 		}
 		else {
-			high = mid - 1; // look on the right
+			high = mid - 1; // othere wise look on the left
 		}
 	}
 	return ans;
@@ -34,11 +34,11 @@ int findCeil(int arr[], int n, int x) {
 		// maybe an answer
 		if (arr[mid] >= x) {
 			ans = arr[mid];
-			//look for smaller index on the left
+			// there could be a smaller value on the left which is also >=x so search on left
 			high = mid - 1;
 		}
 		else {
-			low = mid + 1; // look on the right
+			low = mid + 1; // othere wise look on the right
 		}
 	}
 	return ans;

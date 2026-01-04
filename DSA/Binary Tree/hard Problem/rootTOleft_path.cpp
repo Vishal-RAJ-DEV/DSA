@@ -1,7 +1,9 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
+/*
+Note: No two nodes in the tree have the same data value and it is assured that the given node is present and a path always exists.
+*/
 class Node{
     public :
     int data ;

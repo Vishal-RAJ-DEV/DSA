@@ -3,6 +3,8 @@ using namespace std;
 
 
 //using binary search in each row to find the target element
+//time complexity: O(n log m) where n is number of rows and m is number of columns
+//space complexity: O(1)
 class Solution {
 public:
     // Function to perform binary search on a 1D vector
@@ -58,6 +60,8 @@ public:
 };
 
 //using binary search on virtual 1D array
+//time complexity: O(log (n*m)) where n is number of rows and m is number of columns
+//space complexity: O(1)
 class Solution1 {
 public:
     // Function to search target in a 2D matrix using binary search over a virtual 1D array
