@@ -64,6 +64,9 @@ int main(){
     s.Push(86);
     s.Push(65);
     s.printStack();
+    s.stackPop();
+    cout<<endl;
+    s.printStack();
 
     return 0;
 }

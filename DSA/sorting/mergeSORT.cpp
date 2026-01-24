@@ -1,7 +1,8 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
+// time complexity : O(nlogn) on average case and O(nlogn) on worst case
+// space complexity : O(n)
 void merge(vector <int>& arr,int low,int mid,int high){
     vector <int> temp;
 

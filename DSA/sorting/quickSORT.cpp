@@ -1,7 +1,8 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
-
+// time complexity : O(nlogn) on average case and O(n^2) on worst case
+// space complexity : O(1)
 int partition (vector <int> &arr,int low,int high){
     int pivot = arr[low];
     int i=low;

@@ -16,6 +16,6 @@ int main(){
     int n;
     int m = 47;  //here m is taken as 47 just to avoid overflow for large n 
     cin>>n;
-    cout<<factorial(n, m)<<endl; ;
+    cout<<factorial(n, m)<<endl;
     return 0;
 }
