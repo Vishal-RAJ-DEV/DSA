@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
+//after pushing a element we will rotate the queue to make the last added element at the front of the queue
+//here we are repusing the x queue again and again to simuate the stack behaviour
 class Stack {
   queue < int > q; //it is inbuilt function of the queue 
   public:

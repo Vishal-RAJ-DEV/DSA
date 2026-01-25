@@ -79,9 +79,9 @@ public:
 
 int main() {
     Queue q;
-    q.push(10);
-    q.push(20);
-    q.push(30);
+    q.push(10);              // Queue: [10]
+    q.push(20);             // Queue: [10, 20]  
+    q.push(30);         // Queue: [10, 20, 30]
 
     cout << "Front: " << q.front() << endl; // 10
     cout << "Back: " << q.back() << endl;   // 30

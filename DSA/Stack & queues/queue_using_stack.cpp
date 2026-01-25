@@ -2,6 +2,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//core algorithm is to use two stacks to implement a queue
+//first put elemnet in stack1 when we want to push
+//and when we want pop then push all the elements from stack1 to stack2 and pop from stack2
+//by this we will just reverse the order of elements and get the FIFO order of queue
 class MyQueue {
     stack<int> stack1, stack2;
 

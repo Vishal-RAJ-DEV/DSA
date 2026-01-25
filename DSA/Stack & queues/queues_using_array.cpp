@@ -89,6 +89,10 @@ int main() {
   q.push(14);                // Add 14 → Queue: [4, 14]
   q.push(24);                // Add 24 → Queue: [4, 14, 24]
   q.push(34);                // Add 34 → Queue: [4, 14, 24, 34]
+  q.pop();                  // Remove front (4) → Queue: [14, 24, 34]
+  q.push(44);                // Add 44 → Queue: [14, 24, 34, 44]
+  q.push(54);                // Add 54 → Queue: [14, 24, 34, 44, 54]
+  q.pop();                // Remove front (14) → Queue: [24, 34, 44, 54]
 
   // Show the front element without removing it
   cout << "The peek of the queue before deleting any element " << q.top() << endl;

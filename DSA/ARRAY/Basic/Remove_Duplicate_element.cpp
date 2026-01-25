@@ -17,7 +17,7 @@ int main() {
   int n = sizeof(arr)/sizeof(arr[0]);
   int k = removeDuplicates(arr, n);
   cout << "The array after removing duplicate elements is " << endl;
-  for (int i = 0; i < k; i++) {
+  for (int i = 0; i < n; i++) {
     cout << arr[i] << " ";
   }
 }

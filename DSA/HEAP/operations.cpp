@@ -36,7 +36,7 @@ class MaxHeap {
         //decrease the size so that last element is not considered
         size = size - 1 ;
 
-        //now fix the position of the node
+        //now fix the position of the node form index 0
         int i = 0 ;
         while( i < size){
             int left = 2*i + 1;

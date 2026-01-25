@@ -28,7 +28,7 @@ struct Stack{
         Top = newEle;
         cout<<"Element Pushed: "<<newEle->data<<" "<<endl;
         size ++;
-
+  
     }
     int stackPop(){
         if(Top == nullptr) return -1;
