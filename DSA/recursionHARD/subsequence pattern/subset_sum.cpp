@@ -15,7 +15,7 @@ private:
         }
         // Recursive call: include the current element in the subsequence
         // or exclude the current element from the subsequence
-        return func(ind + 1, sum - nums[ind], nums) | func(ind + 1, sum, nums);
+        return func(ind + 1, sum - nums[ind], nums) || func(ind + 1, sum, nums);
     }
 
 public:

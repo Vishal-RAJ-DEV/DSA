@@ -10,7 +10,7 @@ bool safe( int row , int col , vector<vector<int>> &maze , vector<vector<int>> &
 }
 
 //function to find all paths from top-left to bottom-right in the maze using delrow and delcol arrays
-void ratINmaze_path( int row , int col , vector<vector<int>> &maze , vector<string> & path , string current , vector<vector<int>> &visited){
+void ratINmaze_path1( int row , int col , vector<vector<int>> &maze , vector<string> & path , string current , vector<vector<int>> &visited){
     int n = maze.size();
     int m = maze[0].size();
     
@@ -41,6 +41,7 @@ void ratINmaze_path( int row , int col , vector<vector<int>> &maze , vector<stri
     visited[row][col] = 0 ;
 }
 
+//different implementation without using delrow and delcol arrays
 void ratINmaze_path( int row , int col , vector<vector<int>> &maze , vector<string> & path , string current , vector<vector<int>> &visited){
     int n = maze.size();
     int m = maze[0].size();
