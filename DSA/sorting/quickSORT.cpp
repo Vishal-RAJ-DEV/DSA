@@ -23,7 +23,7 @@ int partition (vector <int> &arr,int low,int high){
 }
 
 void quickSORT(vector <int> &arr,int low,int high){
-    if(low<high){
+    if(low<high){ //not goes if the low is greater than or equal to high because it means that the array is already sorted or there is only one element in the array which is the base case of the recursion
         int pIndex = partition(arr,low,high);
         quickSORT(arr,low,pIndex-1);  //this will sort the left subarray 
         quickSORT(arr,pIndex+1,high); //this will sort the right subarray

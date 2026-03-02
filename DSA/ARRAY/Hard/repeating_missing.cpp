@@ -6,7 +6,7 @@ using namespace std;
 //better solution using o(1) space and o(2n) time complexity
 vector<int> findMissingRepeatingNumbers(vector <int> arr){
     int n = arr.size();
-    int hash[n+1] = {0};
+    int hash[n+1] = {0}; //this is the hash array of the size n+1 because of the 1-based indexing  and initally stores initialized with 0 
 
     for(int i =0;i<n;i++){
         hash[arr[i]]++;
@@ -24,7 +24,7 @@ vector<int> findMissingRepeatingNumbers(vector <int> arr){
 
 
 //optimal solution using o(N) time complexity and o(1) space complexity
-vector<int> findMissingRepeatingNumbers(vector<int> a) {
+vector<int> findMissingRepeatingNumbers1(vector<int> a) {
     long long n = a.size(); // size of the array
 
     // Find Sn and S2n:

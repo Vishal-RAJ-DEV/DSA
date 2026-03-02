@@ -7,7 +7,7 @@ class MaxHeap {
     int arr[100];
     int size = 0 ;
 
-    void insert( int val ){
+    void insert( int val ){ ///this take the time compexity of O(log n) because in worst case we have to traverse the height of the heap which is log n
         int index = size;
         arr[index] = val;
         size = size + 1 ; //for next element
@@ -24,7 +24,7 @@ class MaxHeap {
         }
 
     }
-    void Delete(){
+    void Delete(){ ///this take the time complexity of O(log n) because in worst case we have to traverse the height of the heap which is log n
         if( size == 0){
             cout<<" heap is empty "<<endl;
             return;
@@ -67,7 +67,7 @@ class MaxHeap {
 
     }
     //for the max heapify function
-    void heapify( int arr[] , int n , int i ){
+    void heapify( int arr[] , int n , int i ){ //this function takes the time complexity of O(log n) because in worst case we have to traverse the height of the heap which is log n
         int largest = i ;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -84,7 +84,7 @@ class MaxHeap {
         }
     }
 
-    void heapSort( int arr[] , int n , MaxHeap &h){
+    void heapSort( int arr[] , int n , MaxHeap &h){ //this function takes the time complexity of O(n log n) because we have to call heapify function n times and each heapify call takes O(log n) time
         //every index from n - 1 to 0 will be placed at its correct position that how its sorted array 
         for( int i = n - 1 ; i >= 0 ; i-- ){
             //step 1 : swap the first and last element
@@ -131,5 +131,9 @@ int main(){
     //heap sort 
     h.heapSort( nums , n , h);
     cout<<" printing the array after heap sort "<<endl;
+    for( int i = 0 ; i < n ; i++ ){
+        cout<< nums[i] << " ";
+    }
+    cout<< endl;
     return 0;
 }

@@ -75,7 +75,7 @@ string s = to_string(456);  // int -> string
 
 14. Splitting (using stringstream)
 string str = "apple orange banana";
-stringstream ss(str);
+stringstream ss(str); //this will convert str into stream and start will at the apple and goes one by one to left 
 string word;
 while (ss >> word) {
     cout << word << endl;   // apple, orange, banana
