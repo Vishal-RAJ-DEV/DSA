@@ -3,6 +3,8 @@
 using namespace std;
 // time complexity : O(nlogn) on average case and O(n^2) on worst case
 // space complexity : O(1)
+
+//this partition store all the smaller element than pivot on the left side and all the greater element than pivot on the right side and return the index of the pivot element after partitioning
 int partition (vector <int> &arr,int low,int high){
     int pivot = arr[low];
     int i=low;

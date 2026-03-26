@@ -57,6 +57,46 @@ vector<vector<int>>threeSum(vector<int> &nums){
     return ans;
 }
 
+//this is the code for the three sum closest problem
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int n = nums.size();
+        // Sort the array to enable two-pointer technique
+        sort(nums.begin(), nums.end());
+        // Initialize result with the sum of first three elements
+        int result = nums[0] + nums[1] + nums[2];
+
+        // Iterate through each element as the first element of triplet
+        for(int i = 0; i < n - 2; i++){
+            // Initialize left pointer after current element
+            int left = i + 1;
+            // Initialize right pointer at the end
+            int right = n - 1;
+
+            // Use two pointers to find the closest sum
+            while(left < right){
+                // Calculate sum of current triplet
+                int sum = nums[i] + nums[left] + nums[right];
+
+                // Update result if current sum is closer to target than previous result
+                if(abs(target - result) > abs(target - sum)){
+                    result = sum;
+                }
+
+                // If sum equals target, return immediately (exact match found)
+                if(sum == target) return sum;
+                // If sum is less than target, move left pointer right to increase sum
+                else if(sum < target) left++;
+                // If sum is greater than target, move right pointer left to decrease sum
+                else right--;
+            }
+        }
+
+        // Return the closest sum found
+        return result;
+    }
+};
 
 int main()
 {

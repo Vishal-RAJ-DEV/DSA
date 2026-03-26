@@ -67,6 +67,7 @@ class MaxHeap {
 
     }
     //for the max heapify function
+    //this function takes the time complexity of O(log n) because in worst case we have to traverse the height of the heap which is log n
     void heapify( int arr[] , int n , int i ){ //this function takes the time complexity of O(log n) because in worst case we have to traverse the height of the heap which is log n
         int largest = i ;
         int left = 2 * i + 1;
@@ -84,6 +85,7 @@ class MaxHeap {
         }
     }
 
+    //time complexity of this function is O(n log n) because we have to call heapify function n times and each heapify call takes O(log n) time
     void heapSort( int arr[] , int n , MaxHeap &h){ //this function takes the time complexity of O(n log n) because we have to call heapify function n times and each heapify call takes O(log n) time
         //every index from n - 1 to 0 will be placed at its correct position that how its sorted array 
         for( int i = n - 1 ; i >= 0 ; i-- ){
@@ -119,6 +121,7 @@ int main(){
     //so here the we heapify form the n/2 - 1 th index to 0 th index 
     //beacuse the n/2 - 1 th index is the last non leaf node
     //and form n / 2 to n - 1 th index all are leaf nodes
+    //here time complexity of this process is O(n) because we are calling heapify function n/2 times and each heapify call takes O(log n) time but the number of nodes at each level is decreasing exponentially so the overall time complexity is O(n)
     for( int i = n / 2 - 1 ; i >= 0 ; i--){
         h.heapify( nums , n , i);
     }

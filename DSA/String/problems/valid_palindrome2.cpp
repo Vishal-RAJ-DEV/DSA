@@ -116,5 +116,10 @@ public:
     }
 };
 int main(){
+    string s = "abca";
+    Solution sol;
+    bool result = sol.validPalindrome(s);
+    cout<<"Can the string \""<<s<<"\" be a palindrome after deleting at most one character? "<<(result ? "Yes" : "No")<<endl;
+    
     return 0;
 }

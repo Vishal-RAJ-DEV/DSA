@@ -18,6 +18,7 @@ struct TreeNode
 class Solution
 {
 public:
+// Recursive approach
     TreeNode *insertIntoBST1(TreeNode *root, int val)
     {
         // Base case: empty spot found
@@ -28,17 +29,17 @@ public:
 
         if (val < root->val)
         {
-            root->left = insertIntoBST(root->left, val);
+            root->left = insertIntoBST1(root->left, val);
         }
         else
         {
-            root->right = insertIntoBST(root->right, val);
+            root->right = insertIntoBST1(root->right, val);
         }
 
         return root;
     }
-
-    TreeNode *insertIntoBST(TreeNode *root, int val)
+// Iterative approach
+    TreeNode *insertIntoBST2(TreeNode *root, int val)
     {
         TreeNode *node = new TreeNode(val);
 
@@ -115,7 +116,7 @@ int main()
     root->left->right = new TreeNode(3);
 
     Solution obj;
-    TreeNode *result = obj.insertIntoBST1(root, 6);
+    TreeNode *result = obj.insertIntoBST2(root, 6);
     vector<int> arr = inOrder(result);
     for(int val : arr) {
         cout << val << " ";
