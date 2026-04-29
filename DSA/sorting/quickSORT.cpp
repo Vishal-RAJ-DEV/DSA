@@ -32,7 +32,7 @@ void quickSORT(vector <int> &arr,int low,int high){
         //so first we are partitioning the array and then recursively calling the quickSORT function on the left and right subarrays and also dividing the subarrays further until the base condition is met and the array is sorted for the both left and right subarrays
         
 
-    }
+    }   
 }
 int main(){ //time complexity of the quick sort is O(nlog2^n) and space complexity is O(1)
     vector <int> arr = {4 ,6 ,2, 9 ,5 ,1 ,8 ,3 ,7 ,6};

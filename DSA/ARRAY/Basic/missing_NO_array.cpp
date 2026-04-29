@@ -1,12 +1,56 @@
 #include <iostream>
 #include <bits/stdc++.h>
+using namespace std;
 
 // Problem Statement: Given an integer N and an array of size N-1 containing N-1 numbers between 1 to N. Find the number(between 1 to N), that is not present in the given array.
 
+
+//navie approach: using two loops to check if the number from 1 to N is present in the array or not
+int missingNum(vector<int>& arr) {
+    int n = arr.size() + 1;
+
+    // Iterate from 1 to n and check
+    // if the current number is present
+    for (int i = 1; i <= n; i++) {
+        bool found = false;
+        for (int j = 0; j < n - 1; j++) {
+            if (arr[j] == i) {
+                found = true;
+                break;
+            }
+        }
+
+        // If the current number is not present
+        if (!found)
+            return i;
+    }
+    return -1;
+}
+
+//approch using the hash map to store the frequency of the element and then check which number is missing
+int missingNum(vector<int> &arr) {
+
+    int n = arr.size() + 1;
+
+    // Create hash array of size n+1
+    vector<int> hash(n + 1, 0);
+
+    // Store frequencies of elements
+    for (int i = 0; i < n - 1; i++) {
+        hash[arr[i]]++;
+    }
+
+    // Find the missing number
+    for (int i = 1; i <= n; i++) {
+        if (hash[i] == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
 // optimal approach 1: using the formula of sum of n natural numbers
 // Time complexity: O(N), where N = size of array+1
 // Space complexity: O(1)   
-using namespace std;
 int missing(vector<int>& arr){
     int n = arr.size(); 
     cout<<"n is"<<n<<endl;

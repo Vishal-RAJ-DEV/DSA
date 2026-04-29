@@ -42,7 +42,7 @@ void generateParenthesis( int n , string str , vector<string> &result , int open
         generateParenthesis( n , str + '(' , result , open + 1 , close); //this is other recursive part where '(' is added only if open count is less than n
     }
     if( close < open) {
-        generateParenthesis( n , str + ')' , result , open , close + 1);//this is other recursive part where ')' is added only if close count is less than open count
+        generateParenthesis( n , str + ')' , result , open , close + 1);//this is other recursive part where ')' is added only if close count is less than open count to balances the parenthesis
     }
 }
 int main(){

@@ -15,6 +15,8 @@ struct Node {
 
 // Function to perform inorder traversal
 // of the tree and store values in 'arr'
+//time complexity : O(n) where n is the number of nodes in the binary tree because we are visiting each node once to perform the inorder traversalq
+//height of the binary tree in term of n nodes is log(n) in best case and n in worst case (skewed tree)
 void inorder(Node* root, vector<int> &arr){
     // If the current node is NULL
     // (base case for recursion), return

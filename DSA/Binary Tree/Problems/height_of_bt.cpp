@@ -14,6 +14,7 @@ struct Node {
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
+//time complexity : O(n) where n is the number of nodes in the binary tree why because we are visiting each node once to calculate the depth of the tree
 class Solution{
 public:
     // Function to find the

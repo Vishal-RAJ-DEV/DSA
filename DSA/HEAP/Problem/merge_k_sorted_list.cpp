@@ -51,7 +51,7 @@ public:
     bool operator()(ListNode* a, ListNode* b) {
         return a->val > b->val;
     }
-};
+};              
 
 // Optimal approach: Using a min-heap (priority queue) to merge k sorted linked lists
 // Time complexity: O(N log k) where N is the total number of nodes and k is the number of lists

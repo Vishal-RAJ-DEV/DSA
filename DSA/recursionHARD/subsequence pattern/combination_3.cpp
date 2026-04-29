@@ -25,7 +25,31 @@ Explanation:
 2 + 3 + 4 = 9
 There are no other valid combinations.
 */
+//using the pick or not pick approach
+void generate(int num, int k, int target, vector<int> &subset, vector<vector<int>> &result)
+{
+    // valid combination
+    if (target == 0 && subset.size() == k)
+    {
+        result.push_back(subset);
+        return;
+    }
 
+    // invalid cases
+    if (num > 9 || target < 0 || subset.size() > k)
+        return;
+
+    // ✅ PICK current number
+    subset.push_back(num);
+    generate(num + 1, k, target - num, subset, result);
+    subset.pop_back(); // backtrack
+
+    // ❌ NOT PICK current number
+    generate(num + 1, k, target, subset, result);
+}
+
+//using for loop
+//time complexity : O( 2^n * k) where n is the number of elements and k is the size of the subset
 void generate( int idx ,int k , int target , vector<int> & subset , vector<vector<int>> & result){
     //base case : if the target is 0 and size of the subset is k then we have found a valid combination
     if( target == 0 &&  subset.size() == k){

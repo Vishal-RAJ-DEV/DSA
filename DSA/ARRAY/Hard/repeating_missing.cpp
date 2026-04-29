@@ -27,10 +27,12 @@ vector<int> findMissingRepeatingNumbers(vector <int> arr){
 vector<int> findMissingRepeatingNumbers1(vector<int> a) {
     long long n = a.size(); // size of the array
 
+    //this is the sum of first n natural numbers and sum of squares of first n natural numbers
     // Find Sn and S2n:
     long long SN = (n * (n + 1)) / 2;
     long long S2N = (n * (n + 1) * (2 * n + 1)) / 6;
 
+    //this is the sum of the elements in the array and sum of squares of the elements in the array
     // Calculate S and S2:
     long long S = 0, S2 = 0;
     for (int i = 0; i < n; i++) {

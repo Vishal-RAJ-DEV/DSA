@@ -38,7 +38,7 @@ struct TreeNode {
     TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-
+//here time complexity : O(n) where n is the number of nodes in the binary tree because we are visiting each node once to perform the level order traversal
 class Solution {
 public:
     // Function to perform level-order

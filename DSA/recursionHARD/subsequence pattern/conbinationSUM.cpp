@@ -17,6 +17,30 @@ Output: []
 Explaination: No combination is possible.
             
 */
+
+//same code using for loop 
+void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vector<vector<int>> &result)
+{
+    if (target == 0)
+    {
+        result.push_back(current);
+        return;
+    }
+
+    for (int i = indx; i < arr.size(); i++)
+    {
+        if (arr[i] > target) continue; // optional pruning
+
+        current.push_back(arr[i]);
+
+        // stay at same i (because repetition allowed)
+        generate1(i, target - arr[i], arr, current, result);
+
+        current.pop_back(); // backtrack
+    }
+}
+
+//using the pick or not pick 
 void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vector<vector<int>> &result)
 {
     // Base case: target achieved
@@ -40,6 +64,7 @@ void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vec
     // Exclude current element (move to next)
     generate1(indx + 1, target, arr, current, result);
 }
+
 void generate(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &subset)
 {
     // base case
