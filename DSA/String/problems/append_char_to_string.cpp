@@ -23,6 +23,10 @@ public:
 
 
 int main(){
+    string s = "coaching";
+    string t = "coding";
+    Solution sol; // create solution instance
+    cout << "Minimum characters to append: " << sol.appendCharacters(s, t) << endl; // run and print
     
     return 0;
 }

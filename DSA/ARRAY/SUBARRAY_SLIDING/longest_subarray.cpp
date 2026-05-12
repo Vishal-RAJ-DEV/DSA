@@ -6,6 +6,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Optimal approach : using prefix sum and map
+// time complexity : O(N) and space complexity : O(N) where N is the size
 int getLongestSubarray(vector<int>& a, long long k) {
     int n = a.size(); // size of the array.
 
@@ -175,6 +177,7 @@ Add {19: 9}
 
 maxLen = 4 */
 
+//sliding window approach (only works for positive numbers)
 int getLongestSubarray1(vector<int>& a, long long k) {
     int n = a.size(); // size of the array.
 
