@@ -123,3 +123,69 @@ int main(){
     
     return 0;
 }
+
+/*Case 1 → Remove left character
+s.substr(0, l)
+
+means:
+
+s.substr(0,1)
+
+Result:
+
+"a"
+s.substr(l+1)
+
+means:
+
+s.substr(2)
+
+Result:
+
+"ca"
+
+Now combine:
+
+"a" + "ca"
+
+Result:
+
+"aca"
+
+So effectively:
+
+Removed character at index l
+
+-------------------------------------------------------------------------------------------------
+Case 2 → Remove right character
+s.substr(0,r)
+
+means:
+
+s.substr(0,2)
+
+Result:
+
+"ab"
+s.substr(r+1)
+
+means:
+
+s.substr(3)
+
+Result:
+
+"a"
+
+Combine:
+
+"ab" + "a"
+
+Result:
+
+"aba"
+
+So effectively:
+
+Removed character at index r
+*/

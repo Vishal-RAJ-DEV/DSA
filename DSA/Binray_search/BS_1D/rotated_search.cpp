@@ -12,6 +12,10 @@ int search(vector<int>& arr, int n, int k) {
         //if mid points the target
         if (arr[mid] == k) return mid;
 
+        //NOTE-:
+        //we can only apply binary search on the sorted part of the array:
+        //so check first which part is sorted and then check if the target exists in that part or not:
+
         //if left part is sorted:
         if (arr[low] <= arr[mid]) {
             if (arr[low] <= k && k <= arr[mid]) { //check if the elenment exist in the left part

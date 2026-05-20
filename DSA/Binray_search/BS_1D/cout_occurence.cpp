@@ -53,6 +53,8 @@ using namespace std;
         return last;
     }
 
+    //this will count number of times target comes in the array
+    //by subtracting the first occurence from the last occurence and adding 1 to it( adding 1 because the index starts from 0 and we need to count the target itself as well)
     int countFreq(vector<int>& arr, int target) {
         // code here
         int n = arr.size();

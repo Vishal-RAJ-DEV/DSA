@@ -33,15 +33,21 @@ int singleNonDuplicate(vector<int>& arr) {
             return arr[mid];
         }
 
+        /*Interpretation:
+        If mid is odd and equals previous element, pairing is still correct
+        If mid is even and equals next element, pairing is still correct
+        */
         //we are in the left:
         if ((mid % 2 == 1 && arr[mid] == arr[mid - 1])
                 || (mid % 2 == 0 && arr[mid] == arr[mid + 1])) {
             //eliminate the left half:
             low = mid + 1;
         }
-        //we are in the right:
+        //SINGLE element in the right:
+
         else {
             //eliminate the right half:
+            //single element is in the left:
             high = mid - 1;
         }
     }
