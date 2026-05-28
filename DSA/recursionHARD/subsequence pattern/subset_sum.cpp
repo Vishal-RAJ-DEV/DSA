@@ -17,6 +17,34 @@ private:
         // or exclude the current element from the subsequence
         return func(ind + 1, sum - nums[ind], nums) || func(ind + 1, sum, nums);
     }
+    /*
+    Optimized Version
+    If array contains only positive numbers:
+    */
+    bool func(int ind, int sum, vector<int> &nums)
+    {
+
+        if (sum == 0)
+            return true;
+
+        if (sum < 0)
+            return false;
+
+        if (ind == nums.size())
+            return false;
+
+        return func(ind + 1, sum - nums[ind], nums) ||
+               func(ind + 1, sum, nums);
+    }
+    /*Why This Is Faster
+
+Now recursion stops early when:
+
+target already found
+impossible path (sum < 0)
+
+So recursion tree becomes much smaller.
+*/
 
 public:
     // This method initiates the recursive process
@@ -59,9 +87,9 @@ void generate(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &su
 
 // now if i want to generate only one of the subset which matches the sum then i can use a boolean function here
 
-//here we will return true as soon as we find one subset which matches the sum so that we can stop further recursion
-// and if both the include and exclude calls return false then only we will return false
-//and all the return value will comes back to the main function genrate1 throught the recursion stack of every call 
+// here we will return true as soon as we find one subset which matches the sum so that we can stop further recursion
+//  and if both the include and exclude calls return false then only we will return false
+// and all the return value will comes back to the main function genrate1 throught the recursion stack of every call
 bool generate1(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &subset)
 {
     // base case
@@ -104,9 +132,9 @@ bool generate1(int indx, int n, int s, int sum, vector<int> &arr, vector<int> &s
 
 int main()
 {
-    vector<int> arr = {1, 2, 1};
-    int n = 3; // Length of the string "abc"
-    int sum = 2;
+    vector<int> arr = {1, 2, 3, 4, 5, 3, 1};
+    int n = 7; // Length of the vector
+    int sum = 10;
     ; // The target sum we want to achieve
     vector<int> subset;
     generate(0, n, 0, sum, arr, subset);
@@ -114,7 +142,7 @@ int main()
     cout << "Now printing only one subset which matches the sum " << sum << endl;
     generate1(0, n, 0, sum, arr, subset);
 
-    //this is calll for the if there is the subsequence with the given sum
+    // this is calll for the if there is the subsequence with the given sum
     Solution obj;
     bool ans = obj.checkSubsequenceSum(arr, sum);
     if (ans)
