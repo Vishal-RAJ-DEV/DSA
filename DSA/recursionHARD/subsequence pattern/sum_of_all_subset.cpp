@@ -37,13 +37,39 @@ public:
         int n = arr.size();
         vector<int> sums;
 
-        // Iterate through all possible bitmasks from 0 to 2^n - 1
+        // There are 2^n possible subsets for n elements.
+        // We use numbers from 0 to 2^n - 1 as "masks".
+        // Each bit of mask tells whether to pick one element or not.
+        //
+        // Example: arr = {5, 2, 1}, n = 3
+        // mask = 0 -> binary 000 -> pick nothing        -> sum = 0
+        // mask = 1 -> binary 001 -> pick arr[0]         -> sum = 5
+        // mask = 2 -> binary 010 -> pick arr[1]         -> sum = 2
+        // mask = 3 -> binary 011 -> pick arr[0], arr[1] -> sum = 7
+        // ...
+        // mask = 7 -> binary 111 -> pick all elements   -> sum = 8
+        //
+        // (1 << n) means 2^n.
+        // So this loop runs from 0 to 2^n - 1 and covers every subset.
         for (int mask = 0; mask < (1 << n); mask++)
         {
             int sum = 0; // store sum of current subset
             for (int i = 0; i < n; i++)
             {
-                // If ith bit is set, include arr[i] in sum
+                // (1 << i) creates a number with only the ith bit set.
+                //
+                // Example:
+                // i = 0 -> (1 << 0) = 001
+                // i = 1 -> (1 << 1) = 010
+                // i = 2 -> (1 << 2) = 100
+                //
+                // mask & (1 << i) checks whether the ith bit of mask is 1.
+                // If it is 1, arr[i] belongs to the current subset.
+                //
+                // Example: mask = 5 -> binary 101
+                // i = 0: 101 & 001 = 001, so include arr[0]
+                // i = 1: 101 & 010 = 000, so do not include arr[1]
+                // i = 2: 101 & 100 = 100, so include arr[2]
                 if (mask & (1 << i))
                 {
                     sum += arr[i];
