@@ -26,7 +26,7 @@ int generate1( int indx , int n , int s , int sum , vector<int>&arr , vector<int
 
     return exclude + include;
 }
-
+    
 int main(){
     vector<int> arr = {1,2,1};  
     int n = 3; // Length of the string "abc"
