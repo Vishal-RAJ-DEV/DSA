@@ -140,6 +140,140 @@ public:
     }
 };
 
+// This is type 2 of writing this code
+// Here ind represents the actual index of the item.
+class MemoizationType2 {
+public:
+
+    int solve(vector<int>& wt,
+              vector<int>& val,
+              int ind,
+              int capacity,
+              vector<vector<int>>& dp) {
+
+        // base case
+        if(ind == 0) {
+            if(wt[0] <= capacity) {
+                return val[0];
+            }
+
+            return 0;
+        }
+
+        if(dp[ind][capacity] != -1) {
+            return dp[ind][capacity];
+        }
+
+        // skip
+        int notTake =
+            solve(wt, val, ind - 1, capacity, dp);
+
+        // take
+        int take = 0;
+
+        if(wt[ind] <= capacity) {
+            take = val[ind] +
+                   solve(wt, val,
+                         ind - 1,
+                         capacity - wt[ind],
+                         dp);
+        }
+
+        return dp[ind][capacity] =
+               max(take, notTake);
+    }
+
+    int knapsack(int W, vector<int>& val, vector<int>& wt) {
+
+        int n = val.size();
+
+        vector<vector<int>> dp(n,
+                               vector<int>(W + 1, -1));
+
+        return solve(wt, val, n - 1, W, dp);
+    }
+};
+
+class TabulationType2 {
+public:
+
+    int knapsack(int W, vector<int>& val, vector<int>& wt) {
+
+        int n = val.size();
+
+        vector<vector<int>> dp(n,
+                               vector<int>(W + 1, 0));
+
+        // base case
+        // if we only have item 0, then we can take it
+        // for every capacity greater than or equal to wt[0]
+        for(int capacity = wt[0]; capacity <= W; capacity++) {
+            dp[0][capacity] = val[0];
+        }
+
+        for(int ind = 1; ind < n; ind++) {
+
+            for(int capacity = 0; capacity <= W; capacity++) {
+
+                // skip
+                int notTake = dp[ind - 1][capacity];
+
+                // take
+                int take = 0;
+
+                if(wt[ind] <= capacity) {
+                    take = val[ind] +
+                           dp[ind - 1][capacity - wt[ind]];
+                }
+
+                dp[ind][capacity] = max(take, notTake);
+            }
+        }
+
+        return dp[n - 1][W];
+    }
+};
+
+class SpaceOptimizedType2 {
+public:
+
+    int knapsack(int W, vector<int>& val, vector<int>& wt) {
+
+        int n = val.size();
+
+        vector<int> prev(W + 1, 0);
+        vector<int> curr(W + 1, 0);
+
+        // base case
+        for(int capacity = wt[0]; capacity <= W; capacity++) {
+            prev[capacity] = val[0];
+        }
+
+        for(int ind = 1; ind < n; ind++) {
+
+            for(int capacity = 0; capacity <= W; capacity++) {
+
+                // skip
+                int notTake = prev[capacity];
+
+                // take
+                int take = 0;
+
+                if(wt[ind] <= capacity) {
+                    take = val[ind] +
+                           prev[capacity - wt[ind]];
+                }
+
+                curr[capacity] = max(take, notTake);
+            }
+
+            prev = curr;
+        }
+
+        return prev[W];
+    }
+};
+
 int main(){
     SpaceOptimized s;
     vector<int> val = {60, 100, 120};

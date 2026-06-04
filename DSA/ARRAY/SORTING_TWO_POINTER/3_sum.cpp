@@ -18,6 +18,8 @@ vector<vector<int>> triplet(int n, vector<int> &arr) {
                 sort(temp.begin(), temp.end());
                 st.insert(temp);
             }
+            //if not found, insert the current element in the set: because it can be the 3rd element for the next pairs:
+            //here why not inset arr[i] because we are looking for pairs after i, so arr[i] cannot be the 3rd element for any pair after i, but arr[j] can be the 3rd element for pairs after j.
             hashset.insert(arr[j]);
         }
     }
