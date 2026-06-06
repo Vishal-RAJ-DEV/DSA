@@ -247,6 +247,82 @@ public:
     }
 };
 
+
+
+class AnotherWayOfMemoization {
+public:
+    /*
+        Another way of writing the memoization logic in iterative DP form.
+
+        In the memoization code above:
+        - solve(i, j) stores the answer for text1[0...i] and text2[0...j]
+          inside dp[i][j].
+
+        This code uses the same dp meaning:
+        - dp[i][j] stores the LCS length between:
+              text1[0...i]
+              text2[0...j]
+
+        Difference:
+        - Memoization fills dp using recursive calls from bigger indexes
+          toward smaller indexes.
+        - This version fills dp directly using loops from smaller indexes
+          toward bigger indexes.
+
+        Because dp uses real indexes from 0 to n - 1 and 0 to m - 1,
+        we must handle the first row and first column carefully.
+
+        Time Complexity: O(n * m)
+        Space Complexity: O(n * m)
+    */
+    int longestCommonSubsequence(string text1, string text2) {
+
+        int n = text1.size();
+        int m = text2.size();
+
+        // If any string is empty, no common subsequence is possible.
+        // This also prevents accessing dp[n - 1][m - 1] when n or m is 0.
+        if(n == 0 || m == 0) return 0;
+
+        // dp[i][j] stores the LCS length for text1[0...i] and text2[0...j].
+        vector<vector<int>> dp(n, vector<int>(m, 0));
+
+        for(int i = 0; i < n; i++) {
+
+            for(int j = 0; j < m; j++) {
+
+                // If both current characters match, we include this character.
+                if(text1[i] == text2[j]) {
+
+                    // If we are on the first row or first column, there is no
+                    // diagonal previous answer, so the LCS length becomes 1.
+                    if(i == 0 || j == 0)
+                        dp[i][j] = 1;
+                    else
+                        dp[i][j] = 1 + dp[i-1][j-1];
+
+                }
+                else {
+
+                    // If characters do not match, we try:
+                    // up   -> ignore current character of text1
+                    // left -> ignore current character of text2
+                    int up = (i > 0) ? dp[i-1][j] : 0;
+                    int left = (j > 0) ? dp[i][j-1] : 0;
+
+                    // Keep the longer LCS from both choices.
+                    dp[i][j] = max(up, left);
+                }
+            }
+        }
+
+        // Last cell stores the LCS length of the complete strings.
+        return dp[n-1][m-1];
+    }
+};
+
+
+
 int main(){ 
 
     Memoization obj;
@@ -257,3 +333,4 @@ int main(){
 
     return 0;
 }
+
