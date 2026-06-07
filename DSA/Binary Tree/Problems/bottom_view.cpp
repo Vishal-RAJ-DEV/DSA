@@ -26,7 +26,7 @@ public:
 
         q.push({ root , 0}); //pushing the root node with horizontal distance 0
         
-        while( ! q.empty()){
+        while( !q.empty()){
             //get the front element of the queue
             auto it = q.front();
             q.pop();

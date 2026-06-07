@@ -20,57 +20,79 @@ Input: arr[] = [-7, 4, 1, -2]
 Output: -1
 Explanation: The min absolute sum pair is (1, -2).*/
 
-
 int findpairClosetTo0(vector<int> &arr){
+    /*
+    Algorithm:
+    1. Sort the array.
+    2. Fix one element x = arr[i].
+    3. We now need another element as close as possible to -x,
+       because x + y will then be closest to 0.
+    4. Search in the remaining right part using binary-search-style movement:
+       - calculate mid
+       - compute sum = x + arr[mid]
+       - update the best answer if this sum is closer to 0
+       - if sum < 0, move toward larger values
+       - if sum > 0, move toward smaller values
+    5. If two sums are equally close to 0, keep the larger sum.
+
+    Time Complexity: O(n log n)
+    Space Complexity: O(1) extra space apart from sorting
+    */
+
     int n = arr.size();
-    sort(arr.begin(),arr.end());
-    int min = INT_MAX;
-    for(int i = 0 ;i<n;i++){
+    sort(arr.begin(), arr.end());
+
+    int bestSum = INT_MAX;
+
+    for(int i = 0; i < n; i++){
         int x = arr[i];
-        int left = i+1;  //leave the current element and start from the next element
-        int right = n-1;
+        int left = i + 1;  // do not reuse the same element
+        int right = n - 1;
 
         while(left <= right){
-            int mid = (left + right) / 2;  //binary search to find the element which is closest to -x
-            int sum = x + arr[mid];  //sum of the two elements
+            // mid is the current candidate partner for x.
+            int mid = (left + right) / 2;
+            int sum = x + arr[mid];
 
-            if(abs(sum) == 0){  //if the sum is 0 then return 0
+            // Exact zero is the best possible answer.
+            if(abs(sum) == 0){
                 return 0;
-                
             }
-            else if(abs(sum) < abs(min)){  //if the absolute value of the sum is less than the absolute value of the minimum then update the minimum
-                min = sum;
+
+            // Update answer if current sum is closer to 0.
+            if(abs(sum) < abs(bestSum)){
+                bestSum = sum;
             }
-            else if(abs(sum) == abs(min)){
-                min = max(min,sum);  //if the absolute value of the sum is equal to the absolute value of the minimum then update the minimum to the maximum of the two
+            // If both are equally close to 0, keep the larger sum.
+            else if(abs(sum) == abs(bestSum)){
+                bestSum = max(bestSum, sum);
             }
+
+            /*
+            Intuition:
+            - If sum < 0, the pair is too small.
+              To get closer to 0, we need a bigger value.
+              So move toward the right side.
+
+            - If sum > 0, the pair is too large.
+              To get closer to 0, we need a smaller value.
+              So move toward the left side.
+            */
             if(sum < 0){
-                left = mid + 1;  //if the sum is less than 0 then move the left pointer to mid + 1
+                left = mid + 1;
             }
             else{
-                right = mid - 1;  //if the sum is greater than 0 then move the right pointer to mid - 1
+                right = mid - 1;
             }
         }
     }
 
-    return min;  //return the minimum value found
-
+    // bestSum stores the pair sum whose absolute value is minimum.
+    return bestSum;
 }
+
 int main(){
-    vector<int>arr = { 0, -8, -6, 3 };
-    cout<<findpairClosetTo0(arr);
+    vector<int> arr = {0, -8, -6, 3};
+    cout << findpairClosetTo0(arr);
     return 0;
 }
-
-
-/*
-| i | x  | left | right | mid | arr\[mid] | sum | Condition Checked                      | min Update | Final min |
-| - | -- | ---- | ----- | --- | --------- | --- | -------------------------------------- | ---------- | --------- |
-| 0 | -8 | 1    | 3     | 2   | 0         | -8  | abs(-8) < abs(INT\_MAX)                | min = -8   | -8        |
-| 0 | -8 | 3    | 3     | 3   | 3         | -5  | abs(-5) < abs(-8)                      | min = -5   | -5        |
-| 1 | -6 | 2    | 3     | 2   | 0         | -6  | abs(-6) > abs(-5) → no update          | —          | -5        |
-| 1 | -6 | 3    | 3     | 3   | 3         | -3  | abs(-3) < abs(-5)                      | min = -3   | -3        |
-| 2 | 0  | 3    | 3     | 3   | 3         | 3   | abs(3) == abs(-3) → take max(-3,3) = 3 | min = 3    | 3         |
-| 3 | 3  | 4    | 3     | —   | —         | —   | loop doesn’t run                       | —          | 3         |
-
-*/

@@ -27,37 +27,78 @@
 using namespace std;
 
 int findkrotation(vector<int>& arr){
+    /*
+    Algorithm:
+    1. The number of rotations is equal to the index of the minimum element.
+       Example:
+       original: [1,2,3,4,5]
+       rotated : [4,5,1,2,3]
+       minimum element is 1 at index 2, so array is rotated 2 times.
+
+    2. Use binary search because the array is made of two sorted parts.
+
+    3. At any step:
+       - if the current search space is already sorted, then arr[low] is the
+         minimum of that whole part
+       - otherwise, one half is definitely sorted and the other half contains
+         the rotation point
+
+    4. Track the smallest value seen so far and its index.
+
+    5. Return the index of the minimum element.
+    */
+
     int low = 0, high = arr.size()-1;
     int ans = INT_MAX;
     int index = -1;
     while(low <=high){
         int mid = (low + high) / 2;
-        //search space is already sorted
-        //then arr[low] will always be
-        //the minimum in that search space:
+
+        // If the current search space is already sorted,
+        // then the leftmost element is the minimum in this part.
+        // So we can update the answer and stop.
         if(arr[low]<=arr[high]){
-            if(arr[low]<ans){  // to find the index of minimum element 
+            if(arr[low]<ans){  // store the minimum element and its index
                 index = low;
                 ans = arr[low];
             }
             break;
         }
 
+        /*
+        Intuition:
+        In a rotated sorted array, one side of mid will always be sorted.
+
+        Case 1: Left half is sorted
+        arr[low] <= arr[mid]
+        This means all values from low to mid are in proper order.
+        So the smallest value of this left half is arr[low].
+        The actual rotation point, if it exists, must be on the right side.
+
+        Case 2: Right half is not making left sorted
+        Then the rotation point lies in the left half including mid.
+        In that case arr[mid] can itself be the minimum candidate.
+        */
         if(arr[low] <= arr[mid]) {
-            //left part is sorted:
-           if(arr[low]< ans){
+            // Left part is sorted, so arr[low] is the smallest in this half.
+            if(arr[low]< ans){
             index = low;
             ans = arr[low];
-           }
-            low = mid + 1; // search in the sorted right part
+            }
+
+            // Since left half is sorted, the rotation point must be on right side.
+            low = mid + 1;
         }
 
         else{
+            // Mid lies in the unsorted half, so it can be the minimum candidate.
             if(arr[mid] < ans){
                 index = mid;
                 ans = arr[mid];
             }
-            high = mid -1;  //search in the sorted left part
+
+            // Search in the left half because rotation point is there.
+            high = mid -1;
         }
     }
     return index;
