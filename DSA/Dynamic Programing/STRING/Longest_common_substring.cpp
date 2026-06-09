@@ -242,5 +242,18 @@ public:
 
 
 int main(){
+    string s1 = "abcde";
+    string s2 = "ace";
+        Memoization1 obj1;
+        cout << "Longest Common Substring (Memoization1): " << obj1.longCommSubstr(s1, s2) << endl;
+    
+        Memoization2 obj2;
+        cout << "Longest Common Substring (Memoization2): " << obj2.longCommSubstr(s1, s2) << endl;
+    
+        Tabulation obj3;
+        cout << "Longest Common Substring (Tabulation): " << obj3.longestCommonSubstr(s1, s2) << endl;
+    
+        SpaceOptimized obj4;
+        cout << "Longest Common Substring (Space Optimized): " << obj4.longestCommonSubstr(s1, s2) << endl;
     return 0;
 }
