@@ -2,6 +2,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+
+//time complexity : O(n log n) + O(n) = O(n log n)
+//space complexity : O(n) for the vector of pairs
 class Solution {
   public:
     double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
