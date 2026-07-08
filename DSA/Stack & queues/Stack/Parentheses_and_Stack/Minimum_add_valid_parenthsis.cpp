@@ -19,7 +19,7 @@ public:
         for( char c : s){
             if( c == '('){
                 cnt++;
-
+                
             }
             else{
                 if( cnt> 0 ) cnt--;

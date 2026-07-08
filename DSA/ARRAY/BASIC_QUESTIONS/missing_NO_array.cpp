@@ -28,7 +28,7 @@ int missingNum(vector<int>& arr) {
 }
 
 //approch using the hash map to store the frequency of the element and then check which number is missing
-int missingNum(vector<int> &arr) {
+int missingNum1(vector<int> &arr) {
 
     int n = arr.size() + 1;
 
@@ -51,30 +51,35 @@ int missingNum(vector<int> &arr) {
 // optimal approach 1: using the formula of sum of n natural numbers
 // Time complexity: O(N), where N = size of array+1
 // Space complexity: O(1)   
-int missing(vector<int>& arr){
-    int n = arr.size(); 
-    cout<<"n is"<<n<<endl;
-    int total = n*(n+1)/2;
-    cout<<"total is"<<total<<endl;
-    for(int i=0;i<arr.size();i++){
+int missing(vector<int>& arr) {
+    int n = arr.size();
+
+    int total = (n + 1) * (n + 2) / 2;
+
+    for (int i = 0; i < n; i++) {
         total -= arr[i];
     }
+
     return total;
 }
 
 // optimal approach 2: using XOR operator
 // Time complexity: O(N), where N = size of array+1
 // Space complexity: O(1)
-int missing2(vector<int>&arr){
+int missing2(vector<int>& arr) {
     int n = arr.size();
+
     int xor1 = 0;
     int xor2 = 0;
-    for(int i=0;i<n;i++){
-        xor1 ^= arr[i];
-        xor2 ^= i+1;
-    }
-    return xor1 ^ xor2;
 
+    for (int i = 0; i < n; i++) {
+        xor1 ^= arr[i];
+        xor2 ^= (i + 1);
+    }
+
+    xor2 ^= (n + 1);   // XOR the last number
+
+    return xor1 ^ xor2;
 }
 
 

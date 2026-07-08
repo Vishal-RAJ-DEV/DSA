@@ -84,7 +84,7 @@ int main()
     vector<string> subsequences = getSubsequences(s);
     for (auto &it : subsequences)
     {
-        cout << it << endl;
+        cout << "{" << it << "}" << endl;
     }
 
     cout << "Now using bitmasking to generate subsequences" << endl;
