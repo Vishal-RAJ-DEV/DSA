@@ -14,7 +14,7 @@ struct Node {
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
-class Solution {                        // Optimized approach where time complexity is O(n) and space complexity is O(h) where h is the height of the tree.
+class Solution {// Optimized approach where time complexity is O(n) and space complexity is O(h) where h is the height of the tree.
 
 public:
     // Function to check if a binary tree is balanced
