@@ -85,6 +85,7 @@ class MaxHeap {
         }
     }
 
+    //IMPORTANT : TO SORT THE HEAP ALWAYS FIRST HEAPIFY THE ARRAY AND THEN CALL HEAPSORT FUNCTION , HERE HEAPIFY MEANS MAX HEAPIFY THEN ONLY CALL HEAPSORT FUNCTION OTHERWISE IT WILL NOT WORK
     //time complexity of this function is O(n log n) because we have to call heapify function n times and each heapify call takes O(log n) time
     void heapSort( int arr[] , int n , MaxHeap &h){ //this function takes the time complexity of O(n log n) because we have to call heapify function n times and each heapify call takes O(log n) time
         //every index from n - 1 to 0 will be placed at its correct position that how its sorted array 
