@@ -13,7 +13,7 @@ void printdivisor(int n) {
         }
     }
 
-
+    
     sort(list.begin(), list.end());
     for (auto it : list) cout << it << endl;
 
