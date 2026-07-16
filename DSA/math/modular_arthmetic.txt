@@ -19,8 +19,12 @@ MODULAR ARITHMETIC - Complete Reference
     Division:
     (a / b) mod m = (a * b^(-1)) mod m  [where b^(-1) is modular inverse]
 
+    gcd:
+    gcd( a, b) mod m = ( gcd( a mod m , b mod m )) mod 
+
 3. MODULAR EXPONENTIATION
     (a^b) mod m - computed using binary exponentiation
+    -> (( a mod m)^b ) mod m
     Time Complexity: O(log b)
 
 4. MODULAR INVERSE
