@@ -37,6 +37,8 @@ public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         m = matrix.size(), n = matrix[0].size();
         int left = matrix[0][0], right = matrix[m-1][n-1], ans = -1;
+        // Binary search on the value range
+        //this will find the mid value and then count the number of elements which are less than or equal to the mid value in the matrix
         while (left <= right) {
             int mid = (left + right) >> 1;
             if (countLessOrEqual(matrix, mid) >= k) {
@@ -46,6 +48,11 @@ public:
         }
         return ans;
     }
+
+    //this function is counting the how much number is less than or equal to the mid value in the matrix
+    //and returning the count of that number
+    //and in the main if the count is greater than or equal to the k , then we will move the right pointer to mid - 1 and store the mid value in the ans variable
+    //otherwise we will move the left pointer to mid + 1
     int countLessOrEqual(vector<vector<int>>& matrix, int x) {
         int cnt = 0, c = n - 1;
         for (int r = 0; r < m; ++r) {
@@ -101,7 +108,29 @@ public:
     }
 };
 
+//normal approch just use max heap and push all the elements in the heap and pop the top element when size of heap is greater than k. at the end return the top of the heap which will be the kth smallest element
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        priority_queue<int>pq;
+
+        for( int i = 0; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                pq.push(matrix[i][j]);
+
+                if( pq.size() > k) pq.pop();
+            }
+        }
+
+        return pq.top();
+
+    }
+}; 
 
 int main(){
+
     return 0;
 }
