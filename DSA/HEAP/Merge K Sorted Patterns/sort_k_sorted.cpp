@@ -2,7 +2,7 @@
 using namespace std;
 
 
-class Solution {
+class Solution1 {
 public:
     // Function to sort the array using brute force
     vector<int> sortNearlySortedArray(vector<int>& arr, int k) {

@@ -83,15 +83,33 @@ vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>> &arr) {
     return ans;
 }
 
+
+
 int main()
 {
-    vector<vector<int>> arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18}};
-    vector<vector<int>> ans = mergeOverlappingIntervals(arr);
-    cout << "The merged intervals are: " << "\n";
-    for (auto it : ans) {
+    // vector<vector<int>> arr = {{1, 3}, {8, 10}, {2, 6}, {15, 18}};
+    // vector<vector<int>> ans = mergeOverlappingIntervals(arr);
+    // cout << "The merged intervals are: " << "\n";
+    // for (auto it : ans) {
+    //     cout << "[" << it[0] << ", " << it[1] << "] ";
+    // }
+    // cout << endl;
+
+    vector<vector<int>> arr = { { 3 , 4,} , { 2 ,3 } , { 1 ,2 } };
+    sort(arr.begin(), arr.end());
+    for (auto it : arr) {
         cout << "[" << it[0] << ", " << it[1] << "] ";
     }
     cout << endl;
+
+    vector<vector<int>> intervals = {{1, 4}, {2, 3}, {3, 4}};
+    sort(intervals.begin(), intervals.end());
+
+    for (auto it : intervals) {
+        cout << "[" << it[0] << ", " << it[1] << "] ";
+    }
+    cout << endl;
+
     return 0;
 }
 

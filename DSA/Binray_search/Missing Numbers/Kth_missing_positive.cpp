@@ -203,3 +203,255 @@ int main(){
     return 0;
 }
 
+/*
+=========================================================
+LeetCode 1539 - Kth Missing Positive Number
+=========================================================
+
+Example:
+arr = [2,3,4,7,11]
+k = 5
+
+---------------------------------------------------------
+Step 1: Mark the numbers
+---------------------------------------------------------
+
+Positive Numbers:
+
+1  2  3  4  5  6  7  8  9  10 11
+M  A  A  A  M  M  A  M  M   M  A
+
+A = Present in array
+M = Missing
+
+Missing Numbers:
+1, 5, 6, 8, 9, 10
+
+5th Missing Number = 9
+
+=========================================================
+Step 2: What does Binary Search find?
+=========================================================
+
+Binary Search does NOT directly find the answer.
+
+It finds the LAST index where:
+
+    missing < k
+
+After Binary Search:
+
+high = 3
+
+Meaning:
+
+arr[3] = 7
+
+How many missing numbers are before 7?
+
+missing = arr[3] - (3 + 1)
+        = 7 - 4
+        = 3
+
+Missing Numbers:
+1, 5, 6
+
+Only 3 missing numbers exist before 7.
+
+=========================================================
+Step 3: What does this tell us?
+=========================================================
+
+We need the 5th missing number.
+
+Already found before 7:
+
+1
+5
+6
+
+Count = 3
+
+Still need:
+
+k - missing
+
+= 5 - 3
+
+= 2 more missing numbers
+
+Continue manually after 7:
+
+8  <-- 4th Missing
+9  <-- 5th Missing (Answer)
+
+=========================================================
+Step 4: Now derive the formula
+=========================================================
+
+high = 3
+
+Therefore
+
+arr[3] = 7
+
+How many array elements have we passed?
+
+2
+3
+4
+7
+
+Total Present Elements = 4
+
+Notice:
+
+Present Count = high + 1
+
+because indexing starts from 0.
+
+=========================================================
+Step 5: Observe the answer carefully
+=========================================================
+
+Answer = 9
+
+Numbers before 9:
+
+1 2 3 4 5 6 7 8
+
+Total Numbers = 8
+
+Among them:
+
+Present Numbers:
+
+2
+3
+4
+7
+
+Count = 4
+
+Missing Numbers:
+
+1
+5
+6
+8
+
+Count = 4
+
+Therefore:
+
+8
+=
+4 Present
++
+4 Missing
+
+---------------------------------------------------------
+
+Now include the answer itself:
+
+Up to 9:
+
+Present Numbers:
+
+2
+3
+4
+7
+
+Count = 4
+
+Missing Numbers:
+
+1
+5
+6
+8
+9
+
+Count = 5
+
+Therefore:
+
+9
+=
+4 Present
++
+5 Missing
+
+=========================================================
+Final Observation
+=========================================================
+
+Value of any positive number
+
+=
+Present Numbers before it
++
+Missing Numbers up to it
+
+Present Count
+
+=
+high + 1
+
+Missing Count
+
+=
+k
+
+Therefore
+
+Answer
+
+=
+(high + 1)
++
+k
+
+=========================================================
+Final Formula
+=========================================================
+
+answer = high + 1 + k;
+
+=========================================================
+Important Binary Search Intuition
+=========================================================
+
+Binary Search is NOT searching for the answer.
+
+It is searching for the boundary.
+
+Condition:
+
+missing < k
+
+True Region:
+
+T T T T F F F
+
+          ^
+      Boundary
+
+After Binary Search:
+
+high = Last index where missing < k
+
+That means:
+
+- Every index <= high has fewer than k missing numbers.
+- The kth missing number must lie AFTER arr[high].
+
+Knowing how many present numbers we have passed
+(high + 1), we can directly compute the answer
+using:
+
+answer = high + 1 + k;
+
+This is why the formula works.
+*/
