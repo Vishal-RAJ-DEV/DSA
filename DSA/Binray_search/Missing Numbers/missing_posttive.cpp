@@ -71,6 +71,7 @@ int main(){
     vector<int> nums = {3, 4, -1, 1};
     Solution sol;
     cout<<"first missing positive is"<<"\n"<<sol.firstMissingPositive(nums);
-
+    
     return 0;
 }
+

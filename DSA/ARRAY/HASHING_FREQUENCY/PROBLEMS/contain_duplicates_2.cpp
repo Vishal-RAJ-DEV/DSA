@@ -84,6 +84,35 @@ public:
     }
 };
 
+//this is another approch to solve the problem using hash map, we will store the index of the element in the hash map and if we find the same element again then we will check the difference of the index and if it is less than or equal to k then we will return true otherwise we will update the index of the element in the hash map.
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+
+        // Stores the last index where each number was seen.
+        unordered_map<int, int> lastIndex;
+
+        // Traverse the array.
+        for (int i = 0; i < nums.size(); i++) {
+
+            // Check if we've seen this number before.
+            if (lastIndex.count(nums[i])) {
+
+                // If the distance between the current index and the
+                // previous occurrence is at most k, we found a valid pair.
+                if (i - lastIndex[nums[i]] <= k) {
+                    return true;
+                }
+            }
+
+            // Update the latest index of the current number.
+            lastIndex[nums[i]] = i;
+        }
+
+        // No valid duplicate found.
+        return false;
+    }
+};  
 
 int main(){
     return 0;

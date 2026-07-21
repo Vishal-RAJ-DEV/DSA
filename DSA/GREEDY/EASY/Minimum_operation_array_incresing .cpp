@@ -21,19 +21,19 @@ using namespace std;
 // Space : O(1)
 // Modifies the original array.
 // ============================================================
-//   int minOperations(vector<int>& nums) {
-//       int n = nums.size();
-//       if (n <= 1) return 0;
-//       int ans = 0;
-//       for (int i = 1; i < n; i++) {
-//           if (nums[i-1] >= nums[i]) {
-//               int needed = nums[i-1] - nums[i] + 1;
-//               nums[i] += needed;
-//               ans += needed;
-//           }
-//       }
-//       return ans;
-//   }
+  int minOperations(vector<int>& nums) {
+      int n = nums.size();
+      if (n <= 1) return 0;
+      int ans = 0;
+      for (int i = 1; i < n; i++) {
+          if (nums[i-1] >= nums[i]) {
+              int needed = nums[i-1] - nums[i] + 1;
+              nums[i] += needed;
+              ans += needed;
+          }
+      }
+      return ans;
+  }
 
 // ============================================================
 // APPROACH 2 - Greedy Without Modifying Original (Using prev tracker)
@@ -41,20 +41,20 @@ using namespace std;
 // Space : O(1)
 // Does NOT modify the original array. Tracks the "previous expected value".
 // ============================================================
-//   int minOperations(vector<int>& nums) {
-//       int ans = 0;
-//       int prev = nums[0];
-//       for (int i = 1; i < nums.size(); i++) {
-//           if (prev >= nums[i]) {
-//               int needed = prev - nums[i] + 1;
-//               ans += needed;
-//               prev = nums[i] + needed;  // = prev + 1
-//           } else {
-//               prev = nums[i];
-//           }
-//       }
-//       return ans;
-//   }
+  int minOperations(vector<int>& nums) {
+      int ans = 0;
+      int prev = nums[0];
+      for (int i = 1; i < nums.size(); i++) {
+          if (prev >= nums[i]) {
+              int needed = prev - nums[i] + 1;
+              ans += needed;
+              prev = nums[i] + needed;  // = prev + 1
+          } else {
+              prev = nums[i];
+          }
+      }
+      return ans;
+  }
 
 // ============================================================
 // APPROACH 3 - Using max() / Mathematical Formula
@@ -63,16 +63,16 @@ using namespace std;
 // Directly computes the target value for each position using max().
 // The minimum valid value at index i is max(nums[i], prev_target + 1).
 // ============================================================
-//   int minOperations(vector<int>& nums) {
-//       int ans = 0;
-//       int prev_target = nums[0];
-//       for (int i = 1; i < nums.size(); i++) {
-//           int target = max(nums[i], prev_target + 1);
-//           ans += target - nums[i];
-//           prev_target = target;
-//       }
-//       return ans;
-//   }
+  int minOperations(vector<int>& nums) {
+      int ans = 0;
+      int prev_target = nums[0];
+      for (int i = 1; i < nums.size(); i++) {
+          int target = max(nums[i], prev_target + 1);
+          ans += target - nums[i];
+          prev_target = target;
+      }
+      return ans;
+  }
 
 class Solution {
 public:
