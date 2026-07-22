@@ -188,12 +188,107 @@ public:
     }
 };
 
+/* ==========================================================================
+ *  ALL LCS — Find every Longest Common Subsequence in lexicographical order
+ * ==========================================================================
+ *
+ *  Algorithm:
+ *    1. Compute the standard LCS length DP table (same as above).
+ *    2. Use DFS backtracking from dp[n][m] to dp[0][*] / dp[*][0].
+ *    3. At each step:
+ *       - If text1[i-1] == text2[j-1] : this character IS in the LCS,
+ *         append it, move diagonally to (i-1, j-1).
+ *       - If characters differ, move to ANY neighbour whose dp value
+ *         equals dp[i][j] (may be up, left, or BOTH when tied).
+ *    4. When i == 0 || j == 0, the path has accumulated exactly LCS length
+ *       characters. Reverse the string (built backwards) and store in a set.
+ *    5. Convert the set to a vector<string> for the return value.
+ *       The set automatically keeps strings sorted lexicographically.
+ *
+ *  Time  Complexity: O(n * m + L) where L = total length of all LCS strings
+ *        (can be exponential in worst case, e.g. strings with all same
+ *         characters like "aaa" and "aaa" produce C(n, n/2) LCS strings)
+ *  Space Complexity: O(n * m + L)
+ * ========================================================================== */
+
+class AllLCS {
+public:
+    vector<string> findAllLCS(string &text1, string &text2) {
+        int n = text1.size(), m = text2.size();
+
+        /* ----- Step 1: Standard LCS length DP table ----- */
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (text1[i - 1] == text2[j - 1])
+                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+
+        int lcsLen = dp[n][m];
+        set<string> resultSet;          // automatically sorts lexicographically
+        string current = "";
+
+        /* ----- Step 2: Backtrack to collect ALL optimal paths ----- */
+        function<void(int, int)> backtrack = [&](int i, int j) {
+
+            /* Base case: one string exhausted */
+            if (i == 0 || j == 0) {
+                if ((int)current.size() == lcsLen) {
+                    string rev = current;
+                    reverse(rev.begin(), rev.end());
+                    resultSet.insert(rev);
+                }
+                return;
+            }
+
+            if (text1[i - 1] == text2[j - 1]) {
+                /* Characters match — this char belongs to the LCS */
+                current.push_back(text1[i - 1]);
+                backtrack(i - 1, j - 1);
+                current.pop_back();          // backtrack
+            } else {
+                /* Characters differ — explore every direction that
+                 * still leads to an optimal solution */
+                if (dp[i - 1][j] == dp[i][j])
+                    backtrack(i - 1, j);     // move up
+                if (dp[i][j - 1] == dp[i][j])
+                    backtrack(i, j - 1);     // move left
+            }
+        };
+
+        backtrack(n, m);
+
+        return vector<string>(resultSet.begin(), resultSet.end());
+    }
+};
+
+
+
 int main() {
     string s1 = "abcde";
     string s2 = "ace";
 
     Solution sol;
-    cout << "LCS: " << sol.longestCommonSubsequence(s1, s2) << endl;
+    cout << "Single LCS: " << sol.longestCommonSubsequence(s1, s2) << endl;
+
+    AllLCS all;
+    vector<string> allLcs = all.findAllLCS(s1, s2);
+
+    cout << "\nAll LCS (" << allLcs.size() << " found):" << endl;
+    for (auto &str : allLcs)
+        cout << "  \"" << str << "\"" << endl;
+
+    /* ----- Test with multiple LCS (tied paths) ----- */
+    string s3 = "abc", s4 = "acb";
+    vector<string> res2 = all.findAllLCS(s3, s4);
+
+    cout << "\nLCS of \"abc\" and \"acb\" (" << res2.size() << " found):" << endl;
+    for (auto &str : res2)
+        cout << "  \"" << str << "\"" << endl;
 
     return 0;
 }
