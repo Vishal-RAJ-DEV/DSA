@@ -1,6 +1,56 @@
 #include<bits/stdc++.h>
-
 using namespace std;
+
+
+//using the two queues to implement the stack
+//algorithm :-
+//1. Push operation: When we push an element, we enqueue it to the empty queue (q2) and then dequeue all elements from the other queue (q1) and enqueue them to q2. Finally, we swap the names of the two queues.
+//2. Pop operation: We simply dequeue from the non-empty queue (q1).
+//3. Top operation: We return the front element of the non-empty queue (q1).
+//4. Empty operation: We check if the non-empty queue (q1) is empty.
+//Time Complexity: O(n) for push operation, O(1) for pop, top and empty operations.
+class MyStack {
+public:
+    queue<int> q1, q2;
+
+    MyStack() {
+
+    }
+
+    void push(int x) {
+
+        // Insert new element into q2
+        q2.push(x);
+
+        // Move all existing elements to q2
+        while (!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+
+        // Swap q1 and q2
+        swap(q1, q2);
+    }
+
+    int pop() {
+
+        int val = q1.front();
+        q1.pop();
+
+        return val;
+    }
+
+    int top() {
+
+        return q1.front();
+    }
+
+    bool empty() {
+
+        return q1.empty();
+    }
+};
+
 //after pushing a element we will rotate the queue to make the last added element at the front of the queue
 //here we are repusing the x queue again and again to simuate the stack behaviour
 class Stack {
