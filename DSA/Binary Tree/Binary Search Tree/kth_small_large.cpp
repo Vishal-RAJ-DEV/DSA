@@ -2,18 +2,31 @@
 using namespace std;
 
 // Definition for a binary tree node.
-  struct TreeNode {
-      int data;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
- };
-//brute force approach by storing the values of the nodes in a vector and then finding the kth smallest and kth largest element
-//time complexity : O(n) for the inorder traversal and O(1) for finding the kth smallest and kth largest element
-//space complexity : O(n) for storing the values of the nodes in a vector
+struct TreeNode {
+    int data;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+// ============================================================
+// APPROACH 1 (Brute Force): Store all values in a vector
+//
+// LOGIC:
+//   Inorder traversal of a BST visits nodes in ASCENDING order.
+//   So if we store all node values via inorder into a sorted vector,
+//   then:
+//     - kth smallest = values[k-1]          (0-indexed)
+//     - kth largest  = values[size - k]     (kth from the end)
+//
+// Intuition: Exploit the fact that inorder = sorted order in a BST.
+//            After collecting, it's O(1) array lookup.
+//
+// Time:  O(n) for traversal, O(1) for lookup
+// Space: O(n) for the vector
+// ============================================================
 class Solution1 {
 public:
-    // Helper function to perform an in-order traversal of the BST
     void inorderTraversal(TreeNode* node, vector<int>& values) {
         if (node) {
             inorderTraversal(node->left, values);
@@ -23,70 +36,97 @@ public:
     }
     
     vector<int> kLargesSmall(TreeNode* root, int k) {
-        // Vector to store the node values
         vector<int> values;
-        // Perform in-order traversal and collect values
-        inorderTraversal(root, values);
+        inorderTraversal(root, values);               // values is now sorted (ascending)
         
-        // Find the kth smallest and kth largest values
-        int kth_smallest = values[k - 1];
-        int kth_largest = values[values.size() - k];
+        int kth_smallest = values[k - 1];             // kth from the start (0-indexed)
+        int kth_largest = values[values.size() - k];  // kth from the end
         
         return {kth_smallest, kth_largest};
     }
 };
 
-//optimal approach by using the properties of the binary search tree and performing an inorder traversal to find the kth smallest element and a reverse inorder traversal to find the kth largest element
-//time complexity : O(h) where h is the height of the tree in the average case and O(n) in the worst case (when the tree is skewed)
-//space complexity : O(h) for the recursive stack in the average case and O(n) in the worst case (when the tree is skewed)
+// ============================================================
+// APPROACH 2 (Optimal): Early-termination inorder traversal
+//
+// LOGIC:
+//   Instead of storing ALL values, we traverse and COUNT as we go.
+//   The moment our counter reaches k, we've found our answer and
+//   can STOP early — no need to traverse the rest of the tree.
+//
+//   For kth SMALLEST: use standard inorder (L → Root → R)
+//     Inorder visits nodes in ascending order, so the kth visited
+//     node is the kth smallest. We decrement k as we visit; when
+//     k reaches 0, we've found it.
+//
+//   For kth LARGEST: use reverse inorder (R → Root → L)
+//     Reverse inorder visits nodes in DESCENDING order.
+//     The kth visited node is the kth largest.
+//
+//   How early termination works:
+//     After finding the result, we set result = node->data and return
+//     without recursing into the remaining children. The call stack
+//     unwinds quickly because no further work is done.
+//
+// Intuition:
+//   In a BST, the inorder traversal visits nodes in sorted order.
+//   We just need to stop at the kth element. For largest, we reverse
+//   the traversal direction (right first) to get descending order.
+//
+// Time:  O(h + k) average — h to reach the first node, then k steps
+//         O(n) worst-case (skewed tree)
+// Space: O(h) for recursion stack
+// ============================================================
 class Solution {
 public:
-    // Function to find the kth smallest element
     int kthSmallest(TreeNode* root, int k) {
         this->k = k;
         this->result = -1;
-        inorder(root);
+        inorder(root);                    // Start inorder traversal
         return result;
     }
 
-    // Function to find the kth largest element
     int kthLargest(TreeNode* root, int k) {
         this->k = k;
         this->result = -1;
-        reverse_inorder(root);
+        reverse_inorder(root);            // Start reverse inorder
         return result;
     }
 
-    // Function to return kth smallest and kth largest elements
     vector<int> kLargesSmall(TreeNode* root, int k) {
         return {kthSmallest(root, k), kthLargest(root, k)};
     }
 
 private:
-    int k;
-    int result;
+    int k;          // Remaining count — decremented as we visit nodes
+    int result;     // Stores the answer when k reaches 0
 
-    // Helper function for inorder traversal
+    // ── Inorder (Left → Root → Right): yields ASCENDING order ──
+    // Used for kth SMALLEST.
+    // Each time we visit a node, we decrement k. When k == 0,
+    // this node is the kth one visited → it's the kth smallest.
     void inorder(TreeNode* node) {
         if (node != nullptr) {
-            inorder(node->left);
-            if (--k == 0) {
+            inorder(node->left);          // Traverse left subtree first (smaller elements)
+            if (--k == 0) {               // Visit current: decrement k; if 0, found answer
                 result = node->data;
-                return;
+                return;                   // Early termination — no more recursion needed
             }
-            inorder(node->right);
+            inorder(node->right);         // Traverse right subtree (larger elements)
         }
     }
 
-    // Helper function for reverse inorder traversal
+    // ── Reverse Inorder (Right → Root → Left): yields DESCENDING order ──
+    // Used for kth LARGEST.
+    // Same logic but we go right first (largest elements come first).
     void reverse_inorder(TreeNode* node) {
         if (node != nullptr) {
-            reverse_inorder(node->right);
-            if (--k == 0) {
+            reverse_inorder(node->right); // Traverse right subtree first (larger elements)
+            if (--k == 0) {               // Visit current: when k == 0, found answer
                 result = node->data;
-                return;
+                return;                   // Early termination
             }
-            reverse_inorder(node->left);
+            reverse_inorder(node->left);  // Traverse left subtree (smaller elements)
         }
     }
 };
