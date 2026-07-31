@@ -10,6 +10,42 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+/*
+Problem: LeetCode 863 - All Nodes Distance K in Binary Tree
+Given a binary tree, a target node, and an integer k.
+Find all nodes that are exactly k distance away from the target node.
+
+Intuition:
+In a binary tree, you can only move downward (parent -> child).
+But to reach nodes at distance K, we may need to go UP from the target
+(to its parent), then down another branch, or sideways via a sibling.
+Essentially, we need to treat the tree as an undirected graph.
+
+Approach:
+1. Build a parent pointer map — This gives us the "upward" edge
+   that the tree doesn't natively provide, effectively converting
+   the tree into an undirected graph.
+2. BFS from the target node — Since distance in an unweighted graph
+   is just the number of edges traversed, BFS level-order gives us
+   all nodes at exactly K hops away.
+
+Step-by-step working:
+- mapParentNodes() runs a level-order traversal and records each
+  node's parent in an unordered_map. Now each node can go:
+  left, right (children), or parentMap[node] (parent).
+- bfsFromTarget() starts BFS from target, expanding to left child,
+  right child, and parent at each step. A visited set prevents
+  cycles (going back to where we came from).
+- We track currentLevel. When currentLevel reaches k, all nodes in
+  the BFS queue are exactly k distance away from target. We collect
+  their values and return them.
+
+Time Complexity: O(n) — each node visited once in parent mapping + once in BFS
+Space Complexity: O(n) — parent map, visited set, and queue
+*/
+
+
+
 class Solution {
 public:
     // Main function to find all nodes at distance K from the target node
