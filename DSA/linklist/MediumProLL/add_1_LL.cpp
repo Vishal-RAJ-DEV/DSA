@@ -77,10 +77,28 @@ Node * reverseLinkList(Node * head){  //iterative
 Node * addOneToLLIterateive( Node * head){
     head = reverseLinkList( head);
     Node * temp = head;
+    Node * prev = nullptr;
     int carry = 1;
     while( temp != nullptr && carry != 0){
-        
+        int sum = temp->data + carry;
+        temp->data = sum % 10;
+        carry = sum / 10;
+
+        prev = temp;
+        temp = temp->next;
+
     }
+    // carry still 1 after the loop -> e.g. 999 + 1 = 1000,
+    // a new most-significant node must be appended
+
+    if( carry){
+        Node * newNode = new Node(1);
+        prev->next = newNode;   
+    }
+
+    head = reverseLinkList( head);
+    return head;
+
 }
 
 
