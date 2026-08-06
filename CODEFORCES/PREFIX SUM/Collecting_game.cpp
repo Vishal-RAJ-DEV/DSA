@@ -276,7 +276,7 @@ void solve() {
         else
             reach[i] = i;
     }
-
+ 
     // Restore answers to original order.
     vector<int> ans(n);
 

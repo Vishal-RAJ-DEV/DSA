@@ -114,6 +114,31 @@ public:
 };
 
 
+void solve1() {
+    long long n;
+    cin >> n;
+
+    long long sum = 0;
+
+    // Check every possible divisor till sqrt(n)
+    for (long long i = 1; i * i <= n; i++) {
+
+        // If i divides n
+        if (n % i == 0) {
+
+            // Add first divisor
+            sum += i;
+
+            // Add second divisor only if it is different
+            if (i != n / i)
+                sum += n / i;
+        }
+    }
+
+    // Remove the number itself to get sum of proper divisors
+    cout << sum - n << "\n";
+}
+
 // =========================================================================
 // MAIN — Test Cases with comparison to Sum of All Divisors
 // =========================================================================
