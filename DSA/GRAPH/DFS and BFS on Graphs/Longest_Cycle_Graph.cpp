@@ -166,15 +166,7 @@ Difference
 
 This counts
 
-4
-
-↓
-
-2
-
-↓
-
-3
+4 → 2 → 3
 
 We also need to include node 3 itself.
 
@@ -196,19 +188,7 @@ currentDepth - depth[next] + 1
 
 Exactly
 
-3
-
-↓
-
-2
-
-↓
-
-4
-
-↓
-
-3
+3 → 2 → 4 → 3
 
 This is exactly the same idea as
 
