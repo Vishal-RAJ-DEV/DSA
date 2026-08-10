@@ -16,6 +16,9 @@ string solve(const string& s) {
     for (int i = 0; i + 1 < n; i++) {
         has2.insert(s.substr(i, 2));
     }
+
+
+    
     for (char c1 = 'a'; c1 <= 'z'; c1++) {
         for (char c2 = 'a'; c2 <= 'z'; c2++) {
             string cand = string(1, c1) + c2;
