@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution1 {
+class Solution {
 public:
     // Function to calculate trapped rainwater using brute force approach
     int trap(vector<int>& height) {
@@ -38,8 +38,41 @@ public:
         return totalWater;
     }
 };
+class Solution1 {
+public:
+    int trap(vector<int>& height) {
 
-class Solution {
+        int water = 0;
+        stack<int> st;
+
+        for (int i = 0; i < height.size(); i++) {
+
+            while (!st.empty() && height[i] > height[st.top()]) {
+
+                int bottom = st.top();
+                st.pop();
+
+                if (st.empty())
+                    break;
+
+                int left = st.top();
+                int right = i;
+
+                int width = right - left - 1;
+
+                int boundedHeight =
+                    min(height[left], height[right]) - height[bottom];
+
+                water += width * boundedHeight;
+            }
+
+            st.push(i);
+        }
+
+        return water;
+    }
+};
+class Solution3 {
 public:
     // Function to calculate trapped rainwater using the optimal two-pointer approach
     int trap(vector<int>& height) {
