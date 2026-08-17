@@ -89,13 +89,52 @@ public:
             if (arr[i] > arr[i - 1]) {
                 // Increase: extend previous decreasing sequence
                 up = down + 1;
+                
+                //"I just moved UP, so now my active sequence is UP. Reset DOWN."
                 down = 1;  // Reset decrease counter
             }
             else if (arr[i] < arr[i - 1]) {
                 // Decrease: extend previous increasing sequence
                 down = up + 1;
+
+                //"I just moved DOWN, so now my active sequence is DOWN. Reset UP."
                 up = 1;    // Reset increase counter
             }
+            /*Why is this reset necessary?
+
+                    Look at:
+                    [2, 0, 2, 4]
+
+                    Directions:
+                    2 → 0    DOWN
+                    0 → 2    UP
+                    2 → 4    UP
+
+                    The pattern is:
+                    DOWN → UP → UP
+                    The second UP breaks the turbulence.
+
+                    When we processed:
+                    0 → 2
+                    we had:
+                    down = 2
+                    up = 3
+
+                    But after that, we immediately moved UP again:
+                    2 → 4
+
+                    *We cannot use the old down = 2, because that DOWN happened before the previous UP.
+                    *AND here trublaence is broken, so we cannot extend the previous DOWN. 
+                    ->> so here new up will start and take the reset down = 1 that will be used to calculate the new up = down + 1 = 2.
+                    So we reset:
+                    down = 1;
+                    Then:
+                    up = down + 1
+                    = 1 + 1
+                    = 2;
+
+                    Correctly, [2,4] has length 2.
+                    */
             else {
                 // Equal: turbulence broken, reset both
                 up = 1;
