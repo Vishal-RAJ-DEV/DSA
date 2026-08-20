@@ -19,7 +19,7 @@ Explaination: No combination is possible.
 */
 
 //same code using for loop 
-void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vector<vector<int>> &result)
+void generate2(int indx, int target, vector<int> &arr, vector<int> &current, vector<vector<int>> &result)
 {
     if (target == 0)
     {
@@ -34,7 +34,7 @@ void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vec
         current.push_back(arr[i]);
 
         // stay at same i (because repetition allowed)
-        generate1(i, target - arr[i], arr, current, result);
+        generate2(i, target - arr[i], arr, current, result);
 
         current.pop_back(); // backtrack
     }
