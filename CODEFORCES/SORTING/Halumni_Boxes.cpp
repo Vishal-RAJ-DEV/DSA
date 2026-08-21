@@ -20,7 +20,7 @@ bool solve(){
 }
 int main(){
     int n ;
-    cin>> n ;
+    cin>> n;
 
     while(n--){
         if( solve()){
