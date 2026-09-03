@@ -23,6 +23,7 @@ int findKthPositive(vector<int> &arr, int k)
     
     // Formula to find the kth missing positive number
     return high + 1 + k;
+    //or we can write here, low + k, because after the loop, low = high + 1
 }
 int main()
 {

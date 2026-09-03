@@ -34,6 +34,38 @@ public:
 };
 
 
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+        stack<char> st;
+        int mincnt = 0;
+
+        for (char c : s) {
+
+            if (c == '(') {
+                st.push(c);
+            }
+            else { // c == ')'
+
+                if (!st.empty() && st.top() == '(') {
+                    st.pop();
+                }
+                else {
+                    // No '(' available to match this ')'
+                    mincnt++;
+                }
+            }
+        }
+
+        // Remaining '(' need matching ')'
+        mincnt += st.size();
+
+        return mincnt;
+    }
+};
+
+
+
 int main(){
     string s = "()))((";
     Solution obj;

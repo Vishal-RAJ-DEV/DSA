@@ -387,31 +387,15 @@ Therefore:
 Final Observation
 =========================================================
 
-Value of any positive number
+Value of any positive number = Present Numbers before it + Missing Numbers up to it
 
-=
-Present Numbers before it
-+
-Missing Numbers up to it
+Present Count = high + 1
 
-Present Count
-
-=
-high + 1
-
-Missing Count
-
-=
-k
+Missing Count = k
 
 Therefore
 
-Answer
-
-=
-(high + 1)
-+
-k
+Answer = (high + 1) +  k
 
 =========================================================
 Final Formula

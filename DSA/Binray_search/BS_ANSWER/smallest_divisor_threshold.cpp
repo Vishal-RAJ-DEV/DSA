@@ -47,6 +47,7 @@ int sumByD(vector<int> &arr, int div) {
     int sum = 0;
     for (int i = 0; i < n; i++) {
         sum += ceil((double)(arr[i]) / (double)(div));  //ceil is used to take the upper value after division like 3/2 = 1.5 ceil(1.5) = 2
+        //here the ceil can also be write as the formula (arr[i] + div - 1) / div which is equivalent to ceil(arr[i] / div)
     }
     return sum;
 }
