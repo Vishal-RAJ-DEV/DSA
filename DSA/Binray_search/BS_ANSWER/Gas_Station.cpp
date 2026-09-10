@@ -243,6 +243,42 @@ public:
     }
 };
 
+class Solution {
+public:
+    double minMaxDist(vector<int> &stations, int k) {
+        int n = stations.size();
+        double low = 0.0;
+        double high = stations[n - 1] - stations[0];
+
+        // F(d): Does distance 'd' require strictly more than 'k' stations?
+        // Returns T for small 'd', F for large 'd' (T T T F F F)
+        auto requiresMoreThanK = [&](double d) {
+            int requiredStations = 0;
+            for (int i = 0; i < n - 1; i++) {
+                // Number of cuts needed to make segments <= d
+                requiredStations += (int)((stations[i+1] - stations[i]) / d);
+            }
+            return requiredStations > k;
+        };
+        for (int step = 0; step < 100; step++) {
+            double mid = low + (high - low) / 2.0;
+
+            if (requiresMoreThanK(mid)) {
+                // P(mid) is True. We need more than k stations, meaning 'mid' is too small.
+                // We are in the 'T' segment, we need to move right.
+                low = mid; 
+            } else {
+                // P(mid) is False. We need <= k stations, meaning 'mid' is valid.
+                // We found an 'F', but there might be a smaller 'F' to the left.
+                high = mid; 
+            }
+        }
+        return high;
+    }
+};
+
+
+
 /*
 Approach 4: Binary Search with integer floor + exact-multiple fix
 Same idea as Approach 3, but computes the required stations
