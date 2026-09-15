@@ -6,11 +6,7 @@ void fun(int i,int n,int arr[]){
     if(i>=n/2)
     return ;
     swap(arr[i],arr[n-i-1]);
-    fun(i+1,n,arr);
-
-    
-        
-
+    fun(i+1,n,arr);    
     }
     
 
