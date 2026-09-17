@@ -4,7 +4,7 @@ using namespace std;
 
 
 void insertInSortedStack(stack<int> & st , int val ){
-    if(st.empty() || st.top() <= val){ //if the stack is empty or the top element is less than or equal to the val then we can push the val in the stack
+    if(st.empty() || st.top() >= val){ //if the stack is empty or the top element is less than or equal to the val then we can push the val in the stack
         st.push(val);
         return ;
     }
