@@ -49,6 +49,50 @@ private:
 
         return found;
     }
+
+
+    //another way to implement the dfs function using a loop for directions
+    bool dfs(vector<vector<char>>& board, string& word,int i, int j, int idx) {
+
+        // All characters matched
+        if (idx == word.size())
+            return true;
+
+        // Boundary check + character check
+        if (i < 0 || j < 0 ||
+            i >= board.size() ||
+            j >= board[0].size() ||
+            board[i][j] != word[idx]) {
+            return false;
+        }
+
+        // Mark current cell as visited
+        char temp = board[i][j];
+        board[i][j] = '#';
+
+        // Four directions:
+        // Down, Up, Right, Left
+        int di[] = {1, -1, 0, 0};
+        int dj[] = {0, 0, 1, -1};
+
+        bool found = false;
+
+        for (int k = 0; k < 4; k++) {
+
+            int new_i = i + di[k];
+            int new_j = j + dj[k];
+
+            if (dfs(board, word, new_i, new_j, idx + 1)) {
+                found = true;
+                break;
+            }
+        }
+
+        // Backtracking: restore original character
+        board[i][j] = temp;
+
+        return found;
+    }
 };
 
 int main() {

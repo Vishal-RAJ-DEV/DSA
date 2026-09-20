@@ -53,7 +53,7 @@ void generate1(int indx, int target, vector<int> &arr, vector<int> &current, vec
     // Base case: out of bounds or target becomes negative
     if (indx == arr.size() || target < 0)
     {
-        return;
+        return;                                        
     }
 
     // Include current element (can use same element again)

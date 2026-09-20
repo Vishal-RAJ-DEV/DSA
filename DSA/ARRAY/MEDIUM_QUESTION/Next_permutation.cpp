@@ -33,7 +33,7 @@ int main(){
     for (auto it : nums) {
         cout << it << " ";
     }
-    cout << "]n";
+    cout << "]";
 
     return 0;
 }
