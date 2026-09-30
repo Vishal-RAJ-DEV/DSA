@@ -170,6 +170,44 @@ public:
     }
 };
 
+//this code is more optimized and efficient than the previous two approaches because it uses only O(m) space instead of O(n*m) space. It also avoids recursion and uses a bottom-up approach to fill the minimum path sums for each row iteratively.
+
+class Solution {
+public:
+    int minFallingPathSum(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        
+        // Start from the second row and update matrix values in-place
+        for (int r = 1; r < n; ++r) {
+            for (int c = 0; c < n; ++c) {
+                // Directly above
+                int minAbove = matrix[r - 1][c];
+                
+                // Diagonally left above
+                if (c > 0) {
+                    minAbove = min(minAbove, matrix[r - 1][c - 1]);
+                }
+                
+                // Diagonally right above
+                if (c < n - 1) {
+                    minAbove = min(minAbove, matrix[r - 1][c + 1]);
+                }
+                
+                matrix[r][c] += minAbove;
+            }
+        }
+        
+        // The answer is the minimum value in the last row
+        int minPathSum = matrix[n - 1][0];
+        for (int c = 1; c < n; ++c) {
+            minPathSum = min(minPathSum, matrix[n - 1][c]);
+        }
+        
+        return minPathSum;
+    }
+};
+
+
 int main()
 {
     /*
