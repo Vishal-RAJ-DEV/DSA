@@ -70,7 +70,7 @@ public:
             return false;
 
         // Reached outside grid
-        if (i >= m || j >= n)
+        if (i >= m || j >= n)   
             return false;
 
         // Apply current cell

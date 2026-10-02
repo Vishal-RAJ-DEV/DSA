@@ -1,0 +1,27 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int countNumbersWithUniqueDigits(int n) {
+        if (n == 0) return 1;
+
+        int ans = 10;
+        int count = 9;
+        int available = 9;
+
+        for (int digits = 2; digits <= n; digits++) {
+            count *= available;
+            ans += count;
+            available--;
+        }
+
+        return ans;
+    }
+};
+
+
+int main(){
+    return 0;
+}
