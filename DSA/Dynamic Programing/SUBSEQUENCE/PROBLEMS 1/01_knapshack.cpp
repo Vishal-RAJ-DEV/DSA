@@ -9,6 +9,7 @@ public:
               vector<vector<int>>& dp) {
 
         // base case
+        //when the there is no item left or when the weight is 0 then we can not take any item so return 0
         if(i == 0 || W == 0) {
             return 0;
         }
