@@ -1,6 +1,78 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+long long int solveUtil(int i, vector<int>& arr, vector<long long>& dp) {
+    if (i == 0) return arr[0];
+    if (i < 0) return 0;
+    if (dp[i] != -1) return dp[i];
+
+    long long int pick = arr[i] + solveUtil(i - 2, arr, dp);
+    long long int nonPick = solveUtil(i - 1, arr, dp);
+
+    return dp[i] = max(pick, nonPick);
+}
+
+long long int solve(vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+
+    vector<long long> dp(n, -1);
+    return solveUtil(n - 1, arr, dp);
+}
+
+long long int robStreet(int n, vector<int>& arr) {
+    if (n == 0) return 0;
+    if (n == 1) return arr[0];
+
+    // Case 1: Exclude the first house.
+    vector<int> arr1(arr.begin() + 1, arr.end());
+
+    // Case 2: Exclude the last house.
+    vector<int> arr2(arr.begin(), arr.end() - 1);
+
+    return max(solve(arr1), solve(arr2));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//tabulation code of house robber 2 problem
+
+long long int solve(vector<int>& arr) {
+    int n = arr.size();
+    if (n == 0) return 0;
+    if (n == 1) return arr[0];
+
+    vector<long long> dp(n, 0);
+
+    dp[0] = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        long long int pick = arr[i];
+        if (i > 1) pick += dp[i - 2];
+
+        long long int nonPick = dp[i - 1];
+
+        dp[i] = max(pick, nonPick);
+    }
+
+    return dp[n - 1];
+}
+
+long long int robStreet(int n, vector<int>& arr) {
+    if (n == 0) return 0;
+    if (n == 1) return arr[0];
+
+    // Case 1: Exclude the first house.
+    vector<int> arr1(arr.begin() + 1, arr.end());
+
+    // Case 2: Exclude the last house.
+    vector<int> arr2(arr.begin(), arr.end() - 1);
+
+    return max(solve(arr1), solve(arr2));
+}
+
+
+
+
 // Function to solve the linear house robber problem (no circular arrangement)
 long long int solve(vector<int>& arr) {
     // Get the size of the array

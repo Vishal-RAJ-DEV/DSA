@@ -122,6 +122,54 @@ public:
     }
 };
 
+
+
+class MemoizationVersion {
+public:
+    int lastStoneWeightII(vector<int>& stones) {
+        int total = accumulate(stones.begin(), stones.end(), 0);
+        int target = total / 2;
+        int n = stones.size();
+
+        vector<vector<int>> dp(n, vector<int>(target + 1, -1));
+
+        int S2 = findMaxSum(stones, n - 1, target, dp);
+
+        return total - 2 * S2;
+    }
+
+private:
+    int findMaxSum(vector<int>& stones, int ind, int target,
+                   vector<vector<int>>& dp) {
+        // Base case: only the first stone is available
+        if (ind == 0) {
+            if (stones[0] <= target) return stones[0];
+            return 0;
+        }
+
+        // Return previously calculated result
+        if (dp[ind][target] != -1) {
+            return dp[ind][target];
+        }
+
+        // Do not pick the current stone
+        int notPick = findMaxSum(stones, ind - 1, target, dp);
+
+        // Pick the current stone if possible
+        int pick = 0;
+        if (stones[ind] <= target) {
+            pick = stones[ind] +
+                   findMaxSum(stones, ind - 1, target - stones[ind], dp);
+        }
+
+        // Store the maximum achievable sum
+        return dp[ind][target] = max(pick, notPick);
+    }
+};
+
+
+
+
 int main(){
     return 0;
 }
