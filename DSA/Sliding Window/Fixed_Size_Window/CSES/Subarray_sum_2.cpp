@@ -2,34 +2,24 @@
 using namespace std;
 
 void solve() {
-    int n;
-    int x;
+    int n; long long x;
     cin >> n >> x;
 
     vector<int> arr(n);
-    for(int i =0 ; i < n; i++) {
-        cin >> arr[i];
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    map<long long, long long> cnt;
+    cnt[0] = 1;
+    long long pref = 0, ans = 0;
+
+    for (int i = 0; i < n; i++) {
+        pref += arr[i];
+        ans += cnt[pref - x];  // subarrays ending at i with sum x
+        cnt[pref]++;
     }
 
-    int left =0;
-    int sum = 0;
-    int cnt = 0;
+    cout << ans << "\n";
 
-    for(int right =0; right <n ; right++){
-        sum +=arr[right];
-        while(sum> x && left <= right){
-            sum -=arr[left];
-            left++;
-        }
-
-        if(sum == x){
-            cnt++;
-            sum -=arr[left];
-            left++;
-        }
-    }
-
-    cout << cnt << endl;
 }
 
 int main() {
