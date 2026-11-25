@@ -73,6 +73,45 @@ int characterReplacement(string s, int k)
     }
     return result;
 }
+
+
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int n = s.size();
+        int result = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            vector<int> count(26, 0);
+            int maxFrequency = 0;
+
+            for (int j = i; j < n; j++) {
+
+                // Include current character
+                count[s[j] - 'A']++;
+
+                // Update maximum frequency
+                maxFrequency = max(maxFrequency,
+                                   count[s[j] - 'A']);
+
+                // Calculate required replacements
+                int windowLength = j - i + 1;
+                int replacements = windowLength - maxFrequency;
+
+                // Check if substring is valid
+                if (replacements <= k) {
+                    result = max(result, windowLength);
+                }
+            }
+        }
+
+        return result;
+    }
+};
+
+
 int main()
 {
     string s = "AABABBA";

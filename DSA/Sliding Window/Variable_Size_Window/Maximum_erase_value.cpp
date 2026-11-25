@@ -125,6 +125,37 @@ public:
     }
 };
 
+//another way to write the code where fisrs add the the element then check if it is duplicate or not
+class Solution {
+public:
+    int maximumUniqueSubarray(vector<int>& nums) {
+        unordered_set<int> st;
+
+        int left = 0;
+        int sum = 0;
+        int maxSum = 0;
+
+        for (int right = 0; right < nums.size(); right++) {
+
+            // Expand the window
+            sum += nums[right];
+            st.insert(nums[right]);
+
+            // Shrink while the window has duplicates
+            while (st.size() < right - left + 1) {
+                sum -= nums[left];
+                st.erase(nums[left]);
+                left++;
+            }
+
+            maxSum = max(maxSum, sum);
+        }
+
+        return maxSum;
+    }
+};
+
+
 // ---------------- APPROACH 2: Last Seen Index + Prefix Sum ----------------
 class Solution {
 public:
