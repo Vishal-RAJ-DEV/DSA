@@ -188,6 +188,35 @@ public:
 };
 
 
+//only recrusion code without memoization
+class Solution {
+public:
+    int solve(vector<int>& nums, int i) {
+        int ans = 1;
+
+        for (int j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                ans = max(ans, 1 + solve(nums, j));
+            }
+        }
+
+        return ans;
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        int ans = 1;
+
+        for (int i = 0; i < n; i++) {
+            ans = max(ans, solve(nums, i));
+        }
+
+        return ans;
+    }
+};
+
+
+
 
 /* ==========================================================================
  *  APPROACH 4 — Take / Not Take DP with Memoisation (index + prev)
